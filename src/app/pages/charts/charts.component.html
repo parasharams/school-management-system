@@ -1,0 +1,433 @@
+<!-- page title -->
+<app-page-title [breadcrumbItems]="pageTitle" title="Charts"></app-page-title>
+
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-3">Line with Data Labels</h4>
+
+                <div id="apex-line-1" dir="ltr">
+                    <div style="height: 380px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="lineChartWithData.chart!"
+                        [dataLabels]="lineChartWithData.dataLabels!" [series]="lineChartWithData.series!"
+                        [stroke]="lineChartWithData.stroke!" [responsive]="lineChartWithData.responsive!"
+                        [markers]="lineChartWithData.markers!" [grid]="lineChartWithData.grid!"
+                        [fill]="lineChartWithData.fill!" [yaxis]="lineChartWithData.yaxis!"
+                        [xaxis]="lineChartWithData.xaxis!" [legend]="lineChartWithData.legend!"
+                        *ngIf="lineChartWithData && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+
+    <div class="col-xl-6">
+        <!-- Portlet card -->
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-3">Gradient Line Chart</h4>
+
+                <div id="apex-line-2" dir="ltr">
+                    <div style="height: 380px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="gradientLineChart.chart!" [title]="gradientLineChart.title!"
+                        [series]="gradientLineChart.series!" [stroke]="gradientLineChart.stroke!"
+                        [responsive]="gradientLineChart.responsive!" [markers]="gradientLineChart.markers!"
+                        [grid]="gradientLineChart.grid!" [fill]="gradientLineChart.fill!"
+                        [yaxis]="gradientLineChart.yaxis!" [xaxis]="gradientLineChart.xaxis!"
+                        [legend]="gradientLineChart.legend!" *ngIf="gradientLineChart && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-xl-6">
+        <!-- Portlet card -->
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-3">Stacked Area</h4>
+
+                <div id="apex-area" dir="ltr">
+                    <div style="height: 380px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="stackedAreaChart.chart!"
+                        [dataLabels]="stackedAreaChart.dataLabels!" [series]="stackedAreaChart.series!"
+                        [stroke]="stackedAreaChart.stroke!" [xaxis]="stackedAreaChart.xaxis!"
+                        [legend]="stackedAreaChart.legend!" *ngIf="stackedAreaChart && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-3">Basic Column Chart</h4>
+
+                <div id="apex-column-1" dir="ltr">
+                    <div style="height: 380px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="basicColumnChart.chart!"
+                        [plotOptions]="basicColumnChart.plotOptions!" [dataLabels]="basicColumnChart.dataLabels!"
+                        [series]="basicColumnChart.series!" [stroke]="basicColumnChart.stroke!"
+                        [xaxis]="basicColumnChart.xaxis!" [yaxis]="basicColumnChart.yaxis!"
+                        [grid]="basicColumnChart.grid!" [tooltip]="basicColumnChart.tooltip!"
+                        [legend]="basicColumnChart.legend!" *ngIf="basicColumnChart && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+</div>
+<!-- end row -->
+
+
+<div class="row">
+    <div class="col-xl-6">
+        <!-- Portlet card -->
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-3">Column Chart with Datalabels</h4>
+
+                <div id="apex-column-2" dir="ltr">
+                    <div style="height: 380px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="columnChartWithData.chart!"
+                        [plotOptions]="columnChartWithData.plotOptions!" [dataLabels]="columnChartWithData.dataLabels!"
+                        [series]="columnChartWithData.series!" [fill]="columnChartWithData.fill!"
+                        [xaxis]="columnChartWithData.xaxis!" [yaxis]="columnChartWithData.yaxis!"
+                        [grid]="columnChartWithData.grid!" [title]="columnChartWithData.title!"
+                        *ngIf="columnChartWithData && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-3">Mixed Chart - Line & Area</h4>
+
+                <div id="apex-mixed-1" dir="ltr">
+                    <div style="height: 380px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="mixedChart1.chart!" [fill]="mixedChart1.fill!"
+                        [labels]="mixedChart1.labels!" [series]="mixedChart1.series!" [stroke]="mixedChart1.stroke!"
+                        [markers]="mixedChart1.markers!" [yaxis]="mixedChart1.yaxis!" [tooltip]="mixedChart1.tooltip!"
+                        [legend]="mixedChart1.legend!" *ngIf="mixedChart1 && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-xl-6">
+        <!-- Portlet card -->
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-3">Basic Bar Chart</h4>
+
+                <div id="apex-bar-1">
+                    <div style="height: 380px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="basicBarChart.chart!"
+                        [plotOptions]="basicBarChart.plotOptions!" [series]="basicBarChart.series!"
+                        [dataLabels]="basicBarChart.dataLabels!" [xaxis]="basicBarChart.xaxis!"
+                        *ngIf="basicBarChart && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-3">Bar with Negative Values</h4>
+
+                <div id="apex-bar-2" dir="ltr">
+                    <div style="height: 380px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="barWithNegativeData.chart!"
+                        [plotOptions]="barWithNegativeData.plotOptions!" [series]="barWithNegativeData.series!"
+                        [dataLabels]="barWithNegativeData.dataLabels!" [grid]="barWithNegativeData.grid!"
+                        [xaxis]="barWithNegativeData.xaxis!" [yaxis]="barWithNegativeData.yaxis!"
+                        [legend]="barWithNegativeData.legend!" [tooltip]="barWithNegativeData.tooltip!"
+                        *ngIf="barWithNegativeData && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-xl-6">
+        <!-- Portlet card -->
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-3">Line, Column & Area Chart</h4>
+
+                <div id="apex-mixed-2" dir="ltr">
+                    <div style="height: 380px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="mixedChart2.chart!" [stroke]="mixedChart2.stroke!"
+                        [series]="mixedChart2.series!" [plotOptions]="mixedChart2.plotOptions!"
+                        [fill]="mixedChart2.fill!" [labels]="mixedChart2.labels!" [markers]="mixedChart2.markers!"
+                        [grid]="mixedChart2.grid!" [xaxis]="mixedChart2.xaxis!" [yaxis]="mixedChart2.yaxis!"
+                        [legend]="mixedChart2.legend!" [tooltip]="mixedChart2.tooltip!"
+                        *ngIf="mixedChart2 && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-3">Multiple Y-Axis Chart</h4>
+
+                <div id="apex-mixed-3" dir="ltr">
+                    <div style="height: 380px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="multiYaxisChart.chart!" [stroke]="multiYaxisChart.stroke!"
+                        [series]="multiYaxisChart.series!" [dataLabels]="multiYaxisChart.dataLabels!"
+                        [legend]="multiYaxisChart.legend!" [responsive]="multiYaxisChart.responsive!"
+                        [grid]="multiYaxisChart.grid!" [xaxis]="multiYaxisChart.xaxis!" [yaxis]="multiYaxisChart.yaxis!"
+                        [tooltip]="multiYaxisChart.tooltip!" *ngIf="multiYaxisChart && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-xl-6">
+        <!-- Portlet card -->
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-3">Simple Bubble Chart</h4>
+
+                <div id="apex-bubble-1" dir="ltr">
+                    <div style="height: 380px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="bubbleChart.chart!" [fill]="bubbleChart.fill!"
+                        [series]="bubbleChart.series!" [dataLabels]="bubbleChart.dataLabels!"
+                        [legend]="bubbleChart.legend!" [grid]="bubbleChart.grid!" [xaxis]="bubbleChart.xaxis!"
+                        [yaxis]="bubbleChart.yaxis!" *ngIf="bubbleChart && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-3">3D Bubble Chart</h4>
+
+                <div id="apex-bubble-2" dir="ltr">
+                    <div style="height: 380px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="threeDBubbleChart.chart!" [fill]="threeDBubbleChart.fill!"
+                        [series]="threeDBubbleChart.series!" [dataLabels]="threeDBubbleChart.dataLabels!"
+                        [legend]="threeDBubbleChart.legend!" [grid]="threeDBubbleChart.grid!"
+                        [xaxis]="threeDBubbleChart.xaxis!" [yaxis]="threeDBubbleChart.yaxis!"
+                        *ngIf="threeDBubbleChart && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-xl-6">
+        <!-- Portlet card -->
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-3">Scatter (XY) Chart</h4>
+
+                <div id="apex-scatter-1" dir="ltr">
+                    <div style="height: 380px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="scatterChart.chart!" [series]="scatterChart.series!"
+                        [responsive]="scatterChart.responsive!" [legend]="scatterChart.legend!"
+                        [grid]="scatterChart.grid!" [xaxis]="scatterChart.xaxis!" [yaxis]="scatterChart.yaxis!"
+                        *ngIf="scatterChart && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-3">Scatter Chart - Datetime</h4>
+
+                <div id="apex-scatter-2" dir="ltr">
+                    <div style="height: 380px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="scatterDateTimeChart.chart!"
+                        [series]="scatterDateTimeChart.series!" [responsive]="scatterDateTimeChart.responsive!"
+                        [legend]="scatterDateTimeChart.legend!" [dataLabels]="scatterDateTimeChart.dataLabels!"
+                        [grid]="scatterDateTimeChart.grid!" [xaxis]="scatterDateTimeChart.xaxis!"
+                        [yaxis]="scatterDateTimeChart.yaxis!" *ngIf="scatterDateTimeChart && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-xxl-4 col-md-6">
+        <!-- Portlet card -->
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="header-title mt-0 mb-3">Simple Pie Chart</h4>
+
+                <div id="apex-pie-1" dir="ltr">
+                    <div style="height: 320px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="pieChart.chart!" [labels]="pieChart.labels!"
+                        [series]="pieChart.series!" [legend]="pieChart.legend!" [responsive]="pieChart.responsive!"
+                        *ngIf="pieChart && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+
+    <div class="col-xxl-4 col-md-6">
+        <!-- Portlet card -->
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-3">Gradient Donut Chart</h4>
+
+                <div id="apex-pie-2" dir="ltr">
+                    <div style="height: 320px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="gradientDonutChart.chart!"
+                        [labels]="gradientDonutChart.labels!" [fill]="gradientDonutChart.fill!"
+                        [series]="gradientDonutChart.series!" [legend]="gradientDonutChart.legend!"
+                        [responsive]="gradientDonutChart.responsive!" *ngIf="gradientDonutChart && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+
+    <div class="col-xxl-4 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-3">Patterned Donut Chart</h4>
+
+                <div id="apex-pie-3" dir="ltr">
+                    <div style="height: 320px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="patternedDonutChart.chart!"
+                        [labels]="patternedDonutChart.labels!" [fill]="patternedDonutChart.fill!"
+                        [series]="patternedDonutChart.series!" [stroke]="patternedDonutChart.stroke!"
+                        [dataLabels]="patternedDonutChart.dataLabels!" [states]="patternedDonutChart.states!"
+                        [legend]="patternedDonutChart.legend!" [responsive]="patternedDonutChart.responsive!"
+                        *ngIf="patternedDonutChart && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+    <div class="col-xxl-4 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-3">Basic RadialBar Chart</h4>
+
+                <div id="apex-radialbar-1" dir="ltr">
+                    <div style="height: 350px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="radialChart.chart!" [labels]="radialChart.labels!"
+                        [plotOptions]="radialChart.plotOptions!" [series]="radialChart.series!"
+                        [legend]="radialChart.legend!" [colors]="radialChart.colors!"
+                        *ngIf="radialChart && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+
+    <div class="col-xxl-4 col-md-6">
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="header-title mt-0 mb-3">Multiple RadialBars</h4>
+
+                <div id="apex-radialbar-2" dir="ltr">
+                    <div style="height: 350px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="multiRadialChart.chart!" [labels]="multiRadialChart.labels!"
+                        [plotOptions]="multiRadialChart.plotOptions!" [series]="multiRadialChart.series!"
+                        *ngIf="multiRadialChart && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+
+    <div class="col-xxl-4 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-3">Stroked Circular Guage</h4>
+
+                <div id="apex-radialbar-3" dir="ltr">
+                    <div style="height: 350px; position: relative;" *ngIf="!chartsInitialized">
+                        <app-ui-preloader [display]="!chartsInitialized"></app-ui-preloader>
+                    </div>
+                    <apx-chart class="apex-charts" [chart]="gaugeChart.chart!" [labels]="gaugeChart.labels!"
+                        [plotOptions]="gaugeChart.plotOptions!" [series]="gaugeChart.series!"
+                        [stroke]="gaugeChart.stroke!" [responsive]="gaugeChart.responsive!" [fill]="gaugeChart.fill!"
+                        [colors]="gaugeChart.colors!" *ngIf="gaugeChart && chartsInitialized">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body -->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+</div>
+<!-- end row -->

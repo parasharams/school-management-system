@@ -1,0 +1,129 @@
+<!-- page title -->
+<app-page-title [breadcrumbItems]="pageTitle" title="Feather Icons"></app-page-title>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h5 class="mt-0 mb-1 header-title">Examples</h5>
+                <p class="mb-3">Use <code>&lt;i data-feather="activity"&gt;&lt;/i&gt;</code>.</p>
+
+
+                <div class="row icons-list" appFeatherIcon>
+                    <div class="col-sm-6 col-lg-4 col-xl-3" *ngFor="let icon of featherIcons">
+                        <div class="icon-item">
+                            <i [attr.data-feather]="icon.name"></i>
+                            <span>{{icon.name}}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h5 class="mt-0 mb-1 header-title">Two Tone Icons</h5>
+                <p class="mb-3">Use <code>&lt;i data-feather="activity" class="icon-dual"&gt;&lt;/i&gt;</code>.</p>
+
+
+                <div class="row icons-list">
+                    <div class="col-sm-6 col-lg-4 col-xl-3" *ngFor="let icon of featherIcons">
+                        <div class="icon-item">
+                            <i [attr.data-feather]="icon.name" class="icon-dual"></i>
+                            <span>{{icon.name}}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h5 class="mt-0 mb-1 header-title">Sizes</h5>
+                <p class="mb-3">Use <code>&lt;i data-feather="activity" class="icons-**"&gt;&lt;/i&gt;</code>. Available
+                    sizes <code>sm,md,lg,xl,xxl</code></p>
+
+
+                <div class="row icons-list">
+
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <div class="icon-item">
+                            <i data-feather="airplay" class="icon-xs icon-dual"></i>
+                            <span>Extra Small</span>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <div class="icon-item">
+                            <i data-feather="airplay" class="icon-sm icon-dual"></i>
+                            <span>Small</span>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <div class="icon-item">
+                            <i data-feather="airplay" class="icon-lg icon-dual"></i>
+                            <span>Large</span>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <div class="icon-item">
+                            <i data-feather="airplay" class="icon-xl icon-dual"></i>
+                            <span>Extra Large</span>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <div class="icon-item">
+                            <i data-feather="airplay" class="icon-xxl icon-dual"></i>
+                            <span>Extra Extra Large</span>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h5 class="mt-0 mb-1 header-title">Two Tones Color Icons</h5>
+                <p class="mb-3">Use <code>&lt;i data-feather="activity" class="icon-dual-**"&gt;&lt;/i&gt;</code>.</p>
+                <div class="row icons-list">
+                    <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let icon of featherIconWithVariant">
+                        <div class="icon-item">
+                            <i [attr.data-feather]="icon.name" class="icon-dual-{{icon.variant}}"></i>
+                            <span>{{icon.name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end card -->
+    </div>
+</div>
+<!-- end row -->

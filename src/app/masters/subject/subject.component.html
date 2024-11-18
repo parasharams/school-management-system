@@ -1,0 +1,71 @@
+<app-page-title [breadcrumbItems]="pageTitle" title="Subject Information"></app-page-title>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-end mb-2">
+                    <button class="btn btn-info" (click)="open(FormModal)">+ Add
+                        Subject</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">Subject ID</th>
+                                <th scope="col">Subject Code</th>
+                                <th scope="col">Subject Name</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let sub of subdata">
+                                <th>{{sub.subjectId}}</th>
+                                <td>{{sub.subcode}}</td>
+                                <td>{{sub.subname}}</td>
+                                <td>
+                                    <button class="btn btn-info btn-sm" style="padding: 2px 7px;" (click)="edit(FormModal, sub.subjectId)"><i class="bi bi-pencil-square" style="font-size: 14px;"></i></button>&nbsp;
+                                    <button class="btn btn-danger btn-sm" style="padding: 2px 7px;" (click)="delete(sub.subjectId)"><i class="bi bi-trash" style="font-size: 14px;"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #FormModal let-modal>
+    <div class="modal-header">
+        <h4 *ngIf="!isEditing" class="modal-title" id="modalLabel">Add Teacher</h4>
+                <h4 *ngIf="isEditing" class="modal-title" id="modalLabel">Edit Teacher</h4>
+        <button type="button" class="btn-close" id="cancel" (click)="modal.dismiss('Cross click')"
+            style="margin-left: 0;">
+        </button>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="errMsg" class="alert alert-danger alert-dismissible fade show" role="alert" style="width:100%">
+            <strong>{{errMsg}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div *ngIf="successMsg" class="alert alert-success alert-dismissible fade show" role="alert" style="width:100%">
+            <strong>{{successMsg}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="subForm">
+            <div class="form-group mb-2">
+                <label class="form-label">Subject Code</label>
+                <input type="text" class="form-control" formControlName="subcode" placeholder="Subject Code" />
+            </div>
+            <div class="form-group mb-2">
+                <label class="form-label">Subject name</label>
+                <input type="text" class="form-control" formControlName="subname" placeholder="Subject Name" />    
+            </div>
+            <div class="form-group text-center" *ngIf="!isEditing">
+                <button class="btn btn-primary" type="submit" (click)="create()">Submit</button>
+            </div>
+            <div class="form-group text-center" *ngIf="isEditing">
+                <button class="btn btn-success" type="submit" (click)="update()">Update</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

@@ -1,0 +1,255 @@
+
+<app-page-title [breadcrumbItems]="pageTitle" title="Result List"></app-page-title>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped mb-0">
+                        <thead class="table-light">
+                          <tr>
+                            <th scope="col">Generated ID</th>
+                            <th scope="col">Student</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let sub of groupedExamResults">
+                            <td><button (click)="showResult(FormModal, sub.MarkId, 'lg')" class="btn btn-link btn-sm">{{ sub.MarkId }}</button></td>
+                            <td>{{ studMap[sub.studName] || 'N/A' }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #FormModal let-modal>
+    <div class="modal-header">       
+        <button type="button" class="btn-close" id="cancel" (click)="modal.dismiss('Cross click')"
+            style="margin-left: 0;">
+        </button>
+    </div>
+    <div class="modal-body">
+        <table style="width:100%" cellspacing="0" class="border">
+            <tr>
+               <td>
+                  <img src="marksheet-header.png" class="imglogo"  />
+                  <h3 style="text-align:center;padding:0px !important;margin:0px !important">Marksheet</h3>
+                  <br />
+               </td>
+            </tr>
+            <!-- // Image -->
+            <tr>
+               <td class="border-top ">
+                  <table style="width:100%">
+                     <tr>
+                        <td width="18%" class="bold padl" valign="top">
+                           Name <br />
+                           Father's Name <br />
+                           Mother's Name <br />
+                        </td>
+                        <td width="35%" valign="top">
+                           : PRINCE <br />
+                           : AMIT KUMAR <br />
+                           : CHANDA DEVI
+                        </td>
+                        <td  style="width:30%" valign="top">
+                           <strong>Enrol. No.</strong> : 207410008984 <br />
+                           <strong>Serial No.</strong>  : 161307 <br />
+                           <strong>Study Mode</strong>  : Regular <br />
+                           <strong>Exam Session</strong> :   June-2022
+                        </td>
+                        <td style="width:17%">
+                           <img src="photo.jpg" style="width:80px;height:110px;padding-top:5px" />                              
+                        </td>
+                     </tr>
+                  </table>
+               </td>
+            </tr>
+            <!-- // Stu. Detail-->
+            <tr>
+               <td class="border-top" >
+                  <p style="text-align:center;padding-top:5px;padding-bottom:5px !important;font-size:18px;font-weight:bolder">
+                     Course Name : Advance Diploma in Computer Application( ADCA )
+                  </p>
+               </td>
+            </tr>
+            <!-- // Course Name -->
+            <tr>
+               <td class="border-top">
+                  <table style="width:100%" cellspacing="0">
+                     <tr class="bold">
+                        <td style="width:15%" class="padl ">
+                           Subject Code
+                        </td>
+                        <td class="border-right padl">
+                           Subject Name
+                        </td>
+                        <td style="width:10%" class="border-right padl">
+                           Max. Marks
+                        </td>
+                        <td style="width:10%" class="border-right padl">
+                           Obtain Marks
+                        </td>
+                        <td style="width:8%" class="padl">
+                           Status
+                        </td>
+                     </tr>
+                     <!-- // Header-->
+                     <tr>
+                        <td class="padl border-top">
+                           ADCA-01
+                        </td>
+                        <td class="padl  border-top border-right">
+                           Computer Fundamental/IT
+                        </td>
+                        <td class="padl  border-top border-right padr" align="right">
+                           100
+                        </td>
+                        <td class="padl  border-top border-right padr" align="right">
+                           65
+                        </td>
+                        <td class="padl  border-top" align="center">
+                           SC
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="padl ">
+                           ADCA-01
+                        </td>
+                        <td class="padl   border-right">
+                           Computer Fundamental/IT
+                        </td>
+                        <td class="padl   border-right padr" align="right">
+                           100
+                        </td>
+                        <td class="padl  border-right padr" align="right">
+                           65
+                        </td>
+                        <td class="padl  " align="center">
+                           SC
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="padl ">
+                           ADCA-01
+                        </td>
+                        <td class="padl   border-right">
+                           Computer Fundamental/IT
+                        </td>
+                        <td class="padl   border-right padr" align="right">
+                           100
+                        </td>
+                        <td class="padl  border-right padr" align="right">
+                           65
+                        </td>
+                        <td class="padl  " align="center">
+                           SC
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="padl ">
+                           ADCA-01
+                        </td>
+                        <td class="padl   border-right">
+                           Computer Fundamental/IT
+                        </td>
+                        <td class="padl   border-right padr" align="right">
+                           100
+                        </td>
+                        <td class="padl  border-right padr" align="right">
+                           65
+                        </td>
+                        <td class="padl  " align="center">
+                           SC
+                        </td>
+                     </tr>
+                     <tr>
+                        <td colspan="2" class="bold border-top padr border-right" align="right">
+                           Total Marks
+                        </td>
+                        <td class="bold border-top padr border-right" align="right">
+                           300
+                        </td>
+                        <td class="bold border-top padr" align="right">
+                           452
+                        </td>
+                        <td class="border-top"></td>
+                     </tr>
+                     <!-- // Total-->
+                  </table>
+               </td>
+            </tr>
+            <!-- // Marks-->
+            <tr>
+               <td class="border-top">
+                  <table style="width:100%" cellspacing="0">
+                     <tr>
+                        <td style="width: 50%" class="border-right">
+                           <table style="width:100%" cellspacing="0">
+                              <tr>
+                                 <td colspan="2" class="bold" align="center">
+                                    Legend
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td style="width:75%" class="bold border-top">
+                                    Per >=85<br />
+                                    Per >= 80 & Per <= 85 <br />
+                                    Per >= 75 & Per <= 80 <br />
+                                    Per >= 60 & Per < 75 <br />
+                                    Per >= 45 & Per < 60 <br />
+                                    Per < 45
+                                 </td>
+                                 <td style="width:30%" class=" border-top">
+                                    O+ <br />
+                                    O <br />
+                                    A+ <br />
+                                    A <br />
+                                    B <br />
+                                    C
+                                 </td>
+                              </tr>
+                           </table>
+                        </td>
+                        <td style="width:25%" class="border-right bold" align="center">
+                           <br /><br /><br /><br /><br />
+                           Signatute of Director
+                        </td>
+                        <td style="width:25%" align="center" class="bold">
+                           <br /><br /><br /><br /><br />
+                           Checked By
+                        </td>
+                     </tr>
+                  </table>
+               </td>
+            </tr>
+            <!-- // Legend-->
+            <tr>
+               <td class=" border-top">
+                  <table width="100%" cellspacing="0" class="bold">
+                     <tr>
+                        <td style="width:34%" class="border-right padl">
+                           Date : 10-07-2023
+                        </td>
+                        <td style="width:33%" class="border-right" align="center"> 
+                           Grade : A
+                        </td>
+                        <td style="width:33%" align="center">
+                           Result : Pass
+                        </td>
+                     </tr>
+                  </table>
+               </td>
+            </tr>
+            <!-- // Date/Grade/Result -->
+            <tr>
+               <td class="border-top padl">
+                  <strong>Remark :</strong> SC : Successful Completed, NC : Not Completed
+               </td>
+            </tr>
+            <!-- // Remark -->
+         </table>
+    </div>
+</ng-template>

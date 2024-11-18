@@ -1,0 +1,129 @@
+<!-- page title -->
+<app-page-title [breadcrumbItems]="pageTitle" title="Widgets"></app-page-title>
+
+<!-- stats with icon -->
+<div class="row">
+    <div class="col-sm-6 col-xl-3" *ngFor="let item of statisticsWidgets1">
+        <app-statistics-widget-one [title]="item.title" [stats]="item.stats" [icon]="item.icon"
+            [variant]="item.variant">
+        </app-statistics-widget-one>
+    </div>
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-sm-6 col-xl-3" *ngFor="let item of statisticsWidgets2">
+        <app-statistics-widget-two [title]="item.title" [subTitle]="item.subTitle" [stats]="item.stats"
+            [progress]="item.progress" [variant]="item.variant"></app-statistics-widget-two>
+    </div>
+</div>
+<!-- end row -->
+
+<!-- charts -->
+<div class="row">
+    <div class="col-sm-6 col-xl-3" *ngFor="let item of chartStatisticsWidgets">
+        <app-chart-statistics-widget [mainTitle]="item.mainTitle" [value]="item.value" [subValue]="item.subValue"
+            [chartType]="item.chartType" [chartData]="item.chartData" [chartColors]="item.chartColors">
+        </app-chart-statistics-widget>
+    </div>
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-md-6 col-xl-4" *ngFor="let item of chartWidgets">
+        <app-chart-widget [stats]="item.stats" [title]="item.title" [chartColor]="item.chartColor"
+            [chartData]="item.chartData"></app-chart-widget>
+    </div>
+</div>
+<!-- end row -->
+
+<h4 class="mb-3 pb-1">Profile/User</h4>
+
+<div class="row">
+    <div class="col-md-6 col-xxl-3">
+        <app-widget-profile-one [userName]="user1.userName" [designation]="user1.designation"
+            [profileImage]="user1.profileImage" [about]="user1.about" [tags]="user1.tags"></app-widget-profile-one>
+    </div>
+    <div class="col-md-6 col-xxl-3">
+        <app-widget-profile-two [userName]="user2.userName" [designation]="user2.designation"
+            [profileImage]="user2.profileImage" [coverImage]="user2.coverImage"></app-widget-profile-two>
+    </div>
+
+    <div class="col-md-6 col-xxl-3">
+        <app-widget-profile-three [userName]="user3.userName" [location]="user3.location"
+            [profileImage]="user3.profileImage" [about]="user3.about" [recentPhotos]="user3.recentPhotos"
+            [followers]="12001" [noOfEvents]="1200"></app-widget-profile-three>
+    </div>
+
+    <div class="col-md-6 col-xxl-3">
+        <app-widget-profile-four [userName]="user4.userName" [location]="user4.location"
+            [profileImage]="user4.profileImage"></app-widget-profile-four>
+        <app-widget-profile-five [userName]="user5.userName" [accontId]="user5.accontId"
+            [designation]="user5.designation" [profileImage]="user5.profileImage" followers="1.9M" views="19M"
+            posts="1k"></app-widget-profile-five>
+    </div>
+</div>
+<!-- end row -->
+
+<h4 class="mb-3 pb-1">Team</h4>
+
+<div class="row">
+    <div class="col-xxl-3 col-md-5">
+        <app-widget-members cardTitle="Team Members" [memberList]="teamMembers"></app-widget-members>
+    </div>
+
+    <div class="col-xxl-4 col-md-7">
+        <app-widget-chat cardTitle="Team Chat" [chatMessages]="chatMessages"></app-widget-chat>
+    </div>
+
+    <div class="col-xxl-5 col-md-8">
+        <app-widget-events cardTitle="Team Events" [events]="events"></app-widget-events>
+    </div> <!-- end col -->
+
+    <!-- overview -->
+    <div class="col-md-4 col-xxl-4">
+        <div class="card">
+            <div class="card-body p-0">
+                <div class="p-3">
+                    <div class="float-end" ngbDropdown placement="bottom-end">
+                        <a ngbDropdownToggle class="arrow-none text-muted" id="ecommerceDropdown"
+                            href="javascript:void(0)" aria-expanded="false">
+                            <i class="uil uil-ellipsis-v"></i>
+                        </a>
+                        <div ngbDropdownMenu class="dropdown-menu-end" aria-labelledby="ecommerceDropdown">
+                            <!-- item-->
+                            <a ngbDropdownItem>
+                                <i class="uil uil-refresh me-2"></i>Refresh
+                            </a>
+                            <!-- item-->
+                            <a ngbDropdownItem>
+                                <i class="uil uil-user-plus me-2"></i>Add New
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <!-- item-->
+                            <a ngbDropdownItem>
+                                <i class="uil uil-exit me-2"></i>Exit
+                            </a>
+                        </div>
+                    </div>
+
+                    <h5 class="card-title header-title mb-0">Overview</h5>
+                </div>
+
+                <app-widget-overview *ngFor="let item of overViewItems" [title]="item.title" [stats]="item.stats"
+                    [icon]="item.icon" iconClass="icon-lg"></app-widget-overview>
+
+            </div>
+        </div>
+    </div>
+    <!-- tasks -->
+    <div class="col-md-6 col-xxl-4">
+        <app-widget-task-list cardTitle="Tasks" [taskList]="taskList"></app-widget-task-list>
+    </div>
+
+    <!-- activities -->
+    <div class="col-md-6 col-xxl-4">
+        <app-widget-activity [activities]="activities"></app-widget-activity>
+    </div>
+</div>
+<!-- end row -->

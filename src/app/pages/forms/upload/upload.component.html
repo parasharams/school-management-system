@@ -1,0 +1,51 @@
+<!-- page title -->
+<app-page-title [breadcrumbItems]="pageTitle" title="File Upload"></app-page-title>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mt-0 mb-1">Dropzone File Upload</h4>
+                <p class="sub-header">
+                    DropzoneJS is an open source library that provides drag’n’drop file uploads with image previews.
+                </p>
+
+
+                <form #fileUpload="ngForm">
+
+                    <ngx-dropzone (change)="onSelect($event)" class="dropzone" style="height: auto !important;">
+                        <ngx-dropzone-label>
+                            <i class="h1 text-muted dripicons-cloud-upload"></i>
+                            <h3>Drop files here or click to upload.</h3>
+                            <span class="text-muted font-13">(This is just a demo dropzone. Selected files are
+                                <strong>not</strong> actually uploaded.)</span>
+                        </ngx-dropzone-label>
+                        <ng-container *ngFor="let f of files">
+                            <ngx-dropzone-preview [removable]="true" (removed)="onRemove(f)" (click)="onClick($event)"
+                                *ngIf="!f.type.includes('image')">
+                                <ngx-dropzone-label>
+                                    <div class="dz-size">{{getSize(f)}}</div>
+                                    <div class="dz-filename">{{f.name}}</div>
+                                </ngx-dropzone-label>
+                            </ngx-dropzone-preview>
+                            <ngx-dropzone-preview [removable]="true" (removed)="onRemove(f)" (click)="onClick($event)"
+                                [style.background-image]="getPreviewUrl(f)" [style.background-size]="'cover'"
+                                *ngIf="f.type.includes('image')">
+                                <ngx-dropzone-label>
+                                    <div class="dz-size">{{getSize(f)}}</div>
+                                    <div class="dz-filename">{{f.name}}</div>
+                                </ngx-dropzone-label>
+                            </ngx-dropzone-preview>
+                        </ng-container>
+                    </ngx-dropzone>
+                </form>
+
+                <div class="clearfix text-end mt-3">
+                    <button type="button" class="btn btn-danger"> <i class="uil uil-arrow-right me-1"></i>
+                        Submit</button>
+                </div>
+            </div> <!-- end card-body -->
+        </div>
+    </div> <!-- end col-->
+</div>
+<!-- end row -->

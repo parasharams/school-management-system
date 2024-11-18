@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg py-lg-2 mb-2 sticky-top" id="nav-menu">
+    <div class="container">
+        <!-- logo -->
+
+
+        <div class="auth-logo me-lg-5">
+            <a [routerLink]="'/'" class="logo logo-dark">
+                <span class="logo-lg">
+                    <img src="../assets/images/logo-dark.png" alt="" height="24">
+                </span>
+            </a>
+
+            <a [routerLink]="'/'" class="logo logo-light">
+                <span class="logo-lg">
+                    <img src="../assets/images/logo-light.png" alt="" height="24">
+                </span>
+            </a>
+        </div>
+
+        <button class="navbar-toggler text-dark" type="button" (click)="mobileMenuOpen=!mobileMenuOpen"
+            [attr.aria-expanded]="mobileMenuOpen" aria-label="Toggle navigation">
+            <i class='uil uil-bars'></i>
+        </button>
+
+        <!-- menus -->
+        <div class="collapse navbar-collapse" #collapse="ngbCollapse" [(ngbCollapse)]="!mobileMenuOpen"
+            id="navbarNavDropdown">
+
+            <!-- left menu -->
+            <ul class="navbar-nav me-auto align-items-md-center">
+
+            </ul>
+
+            <!-- right menu -->
+            <ul class="navbar-nav ms-auto align-items-lg-center fs-16 fw-bold">
+                <li class="nav-item mx-lg-1">
+                    <a class="nav-link text-dark link-demos" [routerLink]="['.']" fragment="layoutdemos"
+                        id="link-demos">Demos</a>
+                </li>
+                <li class="nav-item mx-lg-1">
+                    <a class="nav-link text-dark link-demos" id="link-login" [routerLink]="['/auth/login']"
+                        *ngIf="!loggedInUser">Login</a>
+                    <a class="nav-link text-dark link-demos" id="link-logout" [routerLink]="['/auth/logout']"
+                        *ngIf="loggedInUser">Logout</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>

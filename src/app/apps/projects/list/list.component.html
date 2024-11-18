@@ -1,0 +1,120 @@
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <h4 class="page-title">Projects List</h4>
+            <div class="page-title-right">
+                <div class="mt-2 mt-md-0">
+                    <button type="button" class="btn btn-danger me-4 mb-2 mb-sm-0">
+                        <i class="uil-plus me-1"></i> Create Project
+                    </button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary mb-2 mb-sm-0">All</button>
+                    </div>
+                    <div class="btn-group ms-md-1">
+                        <button type="button" class="btn btn-white mb-2 mb-sm-0">Ongoing</button>
+                        <button type="button" class="btn btn-white mb-2 mb-sm-0">Finished</button>
+                    </div>
+                    <div class="btn-group ms-2 d-none d-sm-inline-block me-1">
+                        <button type="button" class="btn btn-primary">
+                            <i class="uil uil-apps"></i>
+                        </button>
+                    </div>
+                    <div class="btn-group d-none d-sm-inline-block">
+                        <button type="button" class="btn btn-white">
+                            <i class="uil uil-align-left-justify"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+
+    <div class="col-xl-4 col-md-6" *ngFor="let project of projectList">
+        <div class="card">
+            <div class="card-body">
+                <div class="badge bg-success float-end" *ngIf="project.state === 'Completed'">
+                    {{project.state}}</div>
+                <div class="badge bg-warning float-end" *ngIf="project.state === 'Pending'">
+                    {{project.state}}</div>
+                <p class="text-success text-uppercase fs-12 mb-2">{{project.technology}}</p>
+                <h5><a [routerLink]="['../details']" [queryParams]="{id:project.id}"
+                        class="text-dark">{{project.title}}</a></h5>
+                <p class="text-muted mb-4">{{project.shortDesc}}</p>
+
+                <div>
+                    <ng-container *ngFor="let member of getDisplayMembersList(project.teamMembers)">
+                        <a href="javascript: void(0);">
+                            <img [src]="member.image" alt="" class="avatar-sm m-1 rounded-circle" *ngIf="member.image">
+                            <div class="avatar-sm fw-bold d-inline-block m-1" *ngIf="member.variant">
+                                <span
+                                    class="avatar-title rounded-circle bg-soft-{{member.variant}} text-{{member.variant}}">{{member.name[0]}}</span>
+                            </div>
+                        </a>
+                    </ng-container>
+                    <a href="javascript: void(0);" *ngIf="project.teamMembers.length!>modifiedTeamMembers.length">
+                        <div class="avatar-sm fw-bold d-inline-block m-1">
+                            <span
+                                class="avatar-title rounded-circle bg-soft-warning text-warning">{{project.teamMembers.length-displayCount}}+</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body border-top">
+                <div class="row align-items-center">
+                    <div class="col-sm-auto">
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item pe-2">
+                                <a href="javascript:void(0)" class="text-muted d-inline-block" placement="top"
+                                    ngbTooltip="Due date">
+                                    <i class="uil uil-calender me-1"></i> {{project.endDate}}
+                                </a>
+                            </li>
+                            <li class="list-inline-item pe-2">
+                                <a href="javascript:void(0)" class="text-muted d-inline-block" placement="top"
+                                    ngbTooltip="Tasks">
+                                    <i class="uil uil-bars me-1"></i> {{project.totalTasks}}
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="javascript:void(0)" class="text-muted d-inline-block" placement="top"
+                                    ngbTooltip="Comments">
+                                    <i class="uil uil-comments-alt me-1"></i> {{project.totalComments}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col offset-sm-1">
+                        <ngb-progressbar type="success" class="mt-4 mt-sm-0" [value]="project.progress!" height="5px"
+                            placement="top" ngbTooltip="{{project.progress}}% completed"
+                            *ngIf="project.state === 'Completed'">
+                        </ngb-progressbar>
+                        <ngb-progressbar type="warning" class="mt-4 mt-sm-0" [value]="project.progress!" height="5px"
+                            placement="top" ngbTooltip="{{project.progress}}% completed"
+                            *ngIf="project.state === 'Pending'">
+                        </ngb-progressbar>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end card -->
+    </div>
+
+</div>
+<!-- end row -->
+
+<div class="row mb-3 mt-2">
+    <div class="col-12">
+        <div class="text-center">
+            <a href="javascript:void(0);" class="btn btn-white">
+                <i data-feather="loader" appFeatherIcon class="icon-dual icon-xs me-2"></i>
+                Load more
+            </a>
+        </div>
+    </div> <!-- end col-->
+</div>
+<!-- end row -->

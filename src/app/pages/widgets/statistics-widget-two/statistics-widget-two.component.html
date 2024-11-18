@@ -1,0 +1,12 @@
+<div class="card">
+    <div class="card-body">
+        <div>
+            <span class="text-muted text-uppercase fs-12 fw-bold">{{title}}</span>
+            <h3 *ngIf="!isNaN(stats)">{{stats | number}}</h3>
+            <h3 *ngIf="isNaN(stats)">{{stats}}</h3>
+            <ngb-progressbar [type]="variant ? variant : 'primary'" [value]="progress!" height="5px" class="my-2">
+            </ngb-progressbar>
+            <span class="text-muted fw-semibold">{{subTitle}}</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<!-- page title -->
+<app-page-title [breadcrumbItems]="pageTitle" title="Pricing"></app-page-title>
+
+<div class="row justify-content-center">
+    <div class="col-xxl-10">
+        <!-- Pricing Title-->
+        <div class="text-center my-4">
+            <h3>Simple pricing for Everyone</h3>
+            <p class="text-muted">
+                Fully functional accounts are starting from $19/month only
+            </p>
+        </div>
+        <!-- Plans -->
+        <app-widget-pricing-cards [pricingPlans]="pricingPlans">
+        </app-widget-pricing-cards>
+
+    </div>
+</div>
+<!-- end row -->

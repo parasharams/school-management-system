@@ -1,0 +1,87 @@
+<app-page-title [breadcrumbItems]="pageTitle" title="Student Attendance Details"></app-page-title>
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="Form" #validate1="ngForm">
+            <div class="current-datetime" style="text-align: right;">
+                <p><b>{{ currentDateTime }}</b></p>
+            </div>
+            <div class="row align-items-end">
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Class</label>
+                        <select class="form-select" formControlName="ClassId" (change)="onChangeClass()" required >
+                            <option value="" selected>Select Class</option>
+                            <option *ngFor="let Item of ClassData; let i = index" value="{{ Item.ClassId }}">{{ Item.ClassName }}</option>
+                        </select>
+                        <div *ngIf="validate1.submitted && form1.ClassId.invalid" class="invalid-feedback">
+                            Please Select Class Name.
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Subject</label>
+                        <select class="form-select" formControlName="SubjectId" (change)="onChangeSubject()" required >
+                            <option value="" selected>Select Subject</option>
+                            <option *ngFor="let Item of SubjectList; let i = index" value="{{ Item.SubjectId }}">{{ Item.SubjectName }}</option>
+                        </select>
+                        <div *ngIf="validate1.submitted && form1.SubjectId.invalid" class="invalid-feedback">
+                            Please Select Subject.
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Date</label>
+                        <input type="date" class="form-control" formControlName="Date" (change)="onChangeDate()" required />
+                        <div *ngIf="validate1.submitted && form1.Date.invalid" class="invalid-feedback">
+                            Please Select Subject.
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary mb-2" (click)="GetData()" style="width: 200px;">Get Attendance</button>&nbsp;
+                    <button type="submit" class="btn btn-danger mb-2" (click)="Cancel()" style="width: 150px;">Cancel</button>
+                </div>
+            </div>
+        </form>
+        <div *ngIf="errMsg" class="alert alert-danger alert-dismissible fade show" role="alert" style="width:100%">
+            {{errMsg}}
+        </div>
+        <div *ngIf="successMsg" class="alert alert-success alert-dismissible fade show" role="alert" style="width:100%">
+            {{successMsg}}
+        </div>
+        <div class="text-center" *ngIf="StudentData && StudentData.length > 0; else noData">
+            <div class="current-datetime" hidden>
+                <p>{{ currentDateTime }}</p>
+            </div>
+            <table class="table table-bordered table-striped mt-2 mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Sr.No.</th>
+                        <th>Name</th>
+                        <th>Roll No.</th>
+                        <th>Class</th>
+                        <th>Subject</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let Item of StudentData; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ studentMap[Item.StudentId] }}</td>
+                        <td>{{ Item.RollNo }}</td>
+                        <td>{{ classMap[Item.ClassId] || 'N/A' }}</td>
+                        <td>{{ subjectMap[Item.SubjectId] }}</td>
+                        <td>{{ formatDate(Item.Date) }}</td>
+                        <td>{{ Item.Status === 1 ? 'Present' : 'Absent' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #noData>
+            <p class="text-center mt-4">No records available.</p>
+        </ng-template>
+    </div>
+</div>

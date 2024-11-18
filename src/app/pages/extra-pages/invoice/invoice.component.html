@@ -1,0 +1,136 @@
+<!-- page title -->
+<app-page-title [breadcrumbItems]="pageTitle" title="Invoice"></app-page-title>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <!-- Logo & title -->
+                <div class="clearfix">
+                    <div class="float-sm-end">
+                        <div class="auth-logo">
+                            <a [routerLink]="['../../dashboard/ecommerce']" class="logo logo-dark text-center">
+                                <span class="logo-lg">
+                                    <img src="../assets/images/logo-dark.png" alt="" height="24">
+                                </span>
+                            </a>
+
+                            <a [routerLink]="['../../dashboard/ecommerce']" class="logo logo-light text-center">
+                                <span class="logo-lg">
+                                    <img src="../assets/images/logo-light.png" alt="" height="24">
+                                </span>
+                            </a>
+                        </div>
+                        <address class="mt-2">
+                            {{invoiceData.address?.line_1}}<br>
+                            {{invoiceData.address?.city}}, {{invoiceData.address?.state}}
+                            {{invoiceData.address?.zip}}<br>
+                            <abbr title="Phone">P:</abbr> {{invoiceData.address?.phone}}
+                        </address>
+                    </div>
+                    <div class="float-sm-start">
+                        <h4 class="m-0 d-print-none">Invoice</h4>
+                        <dl class="row mb-2 mt-3">
+                            <dt class="col-sm-3 fw-normal">Invoice Number :</dt>
+                            <dd class="col-sm-9 fw-normal">{{invoiceData.invoice_id}}</dd>
+
+                            <dt class="col-sm-3 fw-normal">Invoice Date :</dt>
+                            <dd class="col-sm-9 fw-normal">{{invoiceData.invoice_date}}</dd>
+
+                            <dt class="col-sm-3 fw-normal">Due Date :</dt>
+                            <dd class="col-sm-9 fw-normal">{{invoiceData.due_date}}</dd>
+                        </dl>
+                    </div>
+
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h6 class="fw-normal">Invoice For:</h6>
+                        <h6 class="fs-16">{{invoiceData.customer}}</h6>
+                        <address>
+                            {{invoiceData.address?.line_1}}<br>
+                            {{invoiceData.address?.city}}, {{invoiceData.address?.state}}
+                            {{invoiceData.address?.zip}}<br>
+                            <abbr title="Phone">P:</abbr> {{invoiceData.address?.phone}}
+                        </address>
+                    </div> <!-- end col -->
+
+                    <div class="col-md-6">
+                        <div class="text-md-end">
+                            <h6 class="fw-normal">Total</h6>
+                            <h2>{{invoiceData.total | currency}}</h2>
+                        </div>
+                    </div> <!-- end col -->
+                </div>
+                <!-- end row -->
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table mt-4 table-centered table-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Item</th>
+                                        <th style="width: 10%">Hours</th>
+                                        <th style="width: 10%">Hours Rate</th>
+                                        <th style="width: 10%" class="text-end">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of invoiceData.items">
+                                        <td>{{item.id}}</td>
+                                        <td>
+                                            <h5 class="fs-16 mt-0 mb-2">{{item.name}}</h5>
+                                            <p class="text-muted mb-0">{{item.description}}</p>
+                                        </td>
+                                        <td>{{item.hours}}</td>
+                                        <td>{{item.hour_rate | currency}}</td>
+                                        <td class="text-end">{{item.total | currency}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div> <!-- end table-responsive -->
+                    </div> <!-- end col -->
+                </div>
+                <!-- end row -->
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="clearfix pt-5">
+                            <h6 class="text-muted">Notes:</h6>
+
+                            <small class="text-muted">
+                                {{invoiceData.notes}}
+                            </small>
+                        </div>
+                    </div> <!-- end col -->
+                    <div class="col-sm-6">
+                        <div class="float-end mt-4">
+                            <p><span class="fw-medium">Sub-total :</span>
+                                <span class="float-end">{{invoiceData.sub_total | currency}}</span>
+                            </p>
+                            <p><span class="fw-medium">Discount (10%) :</span>
+                                <span class="float-end"> &nbsp;&nbsp;&nbsp; {{invoiceData.discount
+                                    | currency}}</span>
+                            </p>
+                            <h3>{{invoiceData.total | currency}} USD</h3>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div> <!-- end col -->
+                </div>
+                <!-- end row -->
+
+                <div class="mt-5 mb-1">
+                    <div class="text-end d-print-none">
+                        <a href="javascript:window.print()" class="btn btn-primary me-1">
+                            <i class="uil uil-print me-1"></i> Print</a>
+                        <a href="javascript:void(0)" class="btn btn-info">Submit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+<!-- end row -->

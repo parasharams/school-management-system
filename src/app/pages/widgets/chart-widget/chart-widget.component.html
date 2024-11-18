@@ -1,0 +1,12 @@
+<div class="card">
+    <div class="card-body p-0">
+        <div id="chart" dir="ltr">
+            <apx-chart class="apex-charts" [series]="chartOptions.series!" [chart]="chartOptions.chart!"
+                [stroke]="chartOptions.stroke!" [xaxis]="chartOptions.xaxis!" [fill]="chartOptions.fill!"
+                [colors]="chartOptions.colors!" [yaxis]="chartOptions.yaxis!" [labels]="chartOptions.labels!"
+                [title]="chartOptions.title!" [subtitle]="chartOptions.subtitle!" [tooltip]="chartOptions.tooltip!"
+                *ngIf="chartOptions">
+            </apx-chart>
+        </div>
+    </div>
+</div>

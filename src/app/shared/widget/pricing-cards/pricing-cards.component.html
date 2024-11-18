@@ -1,0 +1,31 @@
+<div class="row">
+    <div class="col-lg-4" *ngFor="let plan of pricingPlans">
+        <div class="card card-pricing">
+            <div class="card-body p-4">
+                <div class="d-flex">
+                    <div class="flex-grow-1">
+                        <h5 class="mt-0 mb-2 fs-16">{{plan.name}}</h5>
+                        <h2 class="mt-0 mb-2">{{plan.price | currency}} <span class="fs-14">/ {{plan.duration ?
+                                plan.duration : 'Month'}}</span>
+                        </h2>
+                    </div>
+                    <div class="align-self-center flex-shrink-0">
+                        <i class="icon-dual icon-lg" [attr.data-feather]="plan.icon" appFeatherIcon></i>
+                    </div>
+                </div>
+
+                <ul class="card-pricing-features text-muted border-top pt-2 mt-2 ps-0 list-unstyled">
+                    <li *ngFor="let feature of plan.features"><i
+                            class='uil uil-check text-success fs-15 me-1'></i>{{feature}}
+                    </li>
+                </ul>
+
+                <div class="mt-5 text-center">
+                    <button class="btn px-sm-4" [class]="plan.recommended ? 'btn-primary' : 'btn-soft-primary'">
+                        <i class='uil uil-arrow-right me-1'></i>Buy Now for {{plan.price | currency}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

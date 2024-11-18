@@ -1,0 +1,64 @@
+<app-page-title [breadcrumbItems]="pageTitle" title="Add Marks"></app-page-title>
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="Form" #validate1="ngForm">
+            <div class="row align-items-end">
+                <div class="col-md-4">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Exam Name</label>
+                        <input type="text" class="form-control" formControlName="ExamName" placeholder="Enter Exam Name" required />
+                        <div *ngIf="validate1.submitted && form1.ExamName.invalid" class="invalid-feedback">
+                            Please enter Exam Name.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Exam Session</label>
+                        <select class="form-select" formControlName="ExamSession" required >
+                            <option selected>Select Month</option>
+                            <option *ngFor="let item of monthNames" value="{{item}}">{{item}}</option>
+                        </select>
+                        <div *ngIf="validate1.submitted && form1.ExamSession.invalid" class="invalid-feedback">
+                            Please enter Exam Session.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <button *ngIf="!isEditing" type="submit" (click)="Create()" class="btn btn-primary mb-2" style="width: 200px;">Add Exam</button>
+                    <button *ngIf="isEditing" type="submit" (click)="Update()" class="btn btn-info mb-2" style="width: 150px;">Update Exam</button>&nbsp;
+                    <button *ngIf="isEditing" type="submit" (click)="Cancel()" class="btn btn-danger mb-2" style="width: 150px;">Cancel</button>
+                </div>
+            </div>
+        </form>
+        <div *ngIf="errMsg" class="alert alert-danger alert-dismissible fade show" role="alert" style="width:100%">
+            {{errMsg}}
+        </div>
+        <div *ngIf="successMsg" class="alert alert-success alert-dismissible fade show" role="alert" style="width:100%">
+            {{successMsg}}
+        </div>
+        <div *ngIf="ExamData && ExamData.length > 0; else noData">
+            <table class="table table-bordered table-striped mt-2 mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Sr.No.</th>
+                        <th>Exam Name</th>
+                        <th>Exam Session</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let Item of ExamData; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ Item.ExamName }}</td>
+                        <td>{{ Item.ExamSession }}</td>
+                        <td><a class="btn btn-link btn-sm p-0" (click)="Edit(Item.ExId)">Edit</a> | <a class="btn btn-link btn-sm p-0" (click)="Delete(Item.ExId)">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #noData>
+            <p class="text-center mt-4">No records available.</p>
+        </ng-template>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+<div class="row">
+    <div class="col-12">
+        <h6 class="fs-18">Recent</h6>
+        <div class="card border-0">
+            <div class="card-body">
+                <ul ngbNav #nav="ngbNav" class="nav-tabs">
+                    <li ngbNavItem>
+                        <a ngbNavLink>
+                            <span class="d-block d-sm-none"><i class="uil-home-alt"></i></span>
+                            <span class="d-none d-sm-block">All</span>
+                        </a>
+                        <ng-template ngbNavContent>
+
+                            <ng-container *ngTemplateOutlet="RecentFiles"></ng-container>
+
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem>
+                        <a ngbNavLink>
+                            <span class="d-block d-sm-none"><i class="bi bi-file-earmark"></i></span>
+                            <span class="d-none d-sm-block">Document</span>
+                        </a>
+                        <ng-template ngbNavContent>
+                            <ng-container *ngTemplateOutlet="RecentFiles"></ng-container>
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem>
+                        <a ngbNavLink>
+                            <span class="d-block d-sm-none"><i class="bi bi-file-earmark-music"></i></span>
+                            <span class="d-none d-sm-block">Music</span>
+                        </a>
+                        <ng-template ngbNavContent>
+                            <ng-container *ngTemplateOutlet="RecentFiles"></ng-container>
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem>
+                        <a ngbNavLink>
+                            <span class="d-block d-sm-none"><i class="bi bi-card-image"></i></span>
+                            <span class="d-none d-sm-block">Picture</span>
+                        </a>
+                        <ng-template ngbNavContent>
+                            <ng-container *ngTemplateOutlet="RecentFiles"></ng-container>
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem>
+                        <a ngbNavLink>
+                            <span class="d-block d-sm-none"><i class="bi bi-card-list"></i></span>
+                            <span class="d-none d-sm-block">Other</span>
+                        </a>
+                        <ng-template ngbNavContent>
+                            <ng-container *ngTemplateOutlet="RecentFiles"></ng-container>
+                        </ng-template>
+                    </li>
+                </ul>
+                <div [ngbNavOutlet]="nav" class=" text-muted pt-2"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #RecentFiles>
+    <div class="table-responsive table-nowrap">
+        <table class="table table-centered mb-0">
+            <thead>
+                <tr>
+                    <th class="border-0">File Name</th>
+                    <th class="border-0">Folder Name</th>
+                    <th class="border-0">File Size</th>
+                    <th class="border-0">Last viewed</th>
+                    <th class="border-0">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of recentFiles">
+                    <td>{{item.fileName}}</td>
+                    <td>{{item.folderName}}</td>
+                    <td>{{item.fileSize}}</td>
+                    <td>{{item.lastViewed}}</td>
+                    <td>
+                        <div ngbDropdown container="body">
+                            <a href="javascript:void(0);" class="table-action-btn arrow-none btn btn-light btn-xs"
+                                ngbDropdownToggle><i class="uil uil-ellipsis-h"></i></a>
+                            <div class="dropdown-menu-end" ngbDropdownMenu>
+                                <a ngbDropdownItem href="javascript:void(0);"><i
+                                        class="uil uil-share-alt me-2 text-muted vertical-middle"></i>Share</a>
+                                <a ngbDropdownItem href="javascript:void(0);"><i
+                                        class="uil uil-link-h me-2 text-muted vertical-middle"></i>Get
+                                    Sharable Link</a>
+                                <a ngbDropdownItem href="javascript:void(0);"><i
+                                        class="uil uil-pen me-2 text-muted vertical-middle"></i>Rename</a>
+                                <a ngbDropdownItem href="javascript:void(0);"><i
+                                        class="uil uil-arrow-to-bottom me-2 text-muted vertical-middle"></i>Download</a>
+                                <a ngbDropdownItem href="javascript:void(0);"><i
+                                        class="uil uil-trash-alt me-2 text-muted vertical-middle"></i>Remove</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ng-template>

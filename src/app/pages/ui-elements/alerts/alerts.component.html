@@ -1,0 +1,26 @@
+<div class="card">
+    <div class="card-body">
+        <div>
+            <h5 class="header-title mb-1 mt-0">Alerts</h5>
+            <p class="sub-header">
+                Provide contextual feedback messages for typical user actions with the handful of available and flexible
+                alert messages.
+            </p>
+
+            <ng-container *ngFor="let alert of alertVariants1">
+                <ngb-alert [type]="alert.color" [dismissible]="false">
+                    A simple {{alert.name}} alert—check it out!
+                </ngb-alert>
+            </ng-container>
+
+
+            <ng-container *ngFor="let alert of alertVariants2;let i=index">
+                <ngb-alert [type]="alert.color" (closed)="closeAlert(alert)" [class.mb-0]="i===alertVariants2.length">
+                    A simple {{alert.name}} alert—check it out!
+                </ngb-alert>
+            </ng-container>
+
+        </div>
+
+    </div>
+</div>

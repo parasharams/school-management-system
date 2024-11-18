@@ -1,0 +1,79 @@
+<app-page-title [breadcrumbItems]="pageTitle" title="Results"></app-page-title>
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="Form" #validate1="ngForm" class="mb-2">
+            <div class="row align-items-end">
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Class</label>
+                        <select class="form-select" formControlName="ClassId" (change)="onChangeClass()" placeholder="Select Class" required >
+                            <option value="" selected>Select Class</option>
+                            <option *ngFor="let Item of ClassData; let i = index" value="{{ Item.ClassId }}">{{ Item.ClassName }}</option>
+                        </select>
+                        <div *ngIf="validate1.submitted && form1.ClassId.invalid" class="invalid-feedback">
+                            Please Select Class Name.
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Exam</label>
+                        <select class="form-select" formControlName="ExId" (change)="onChangeExam()" required >
+                            <option value="" selected>Select Exam</option>
+                            <option *ngFor="let Item of ExamList; let i = index" value="{{ Item.ExId }}">{{ Item.ExamName }}</option>
+                        </select>
+                        <div *ngIf="validate1.submitted && form1.ExId.invalid" class="invalid-feedback">
+                            Please Select Exam.
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Student Roll Number</label>
+                        <select class="form-select" formControlName="RollNo" required >
+                            <option value="" selected>Select Student Roll Number</option>
+                            <option *ngFor="let RollNo of UniqueRollNos; let i = index" value="{{ RollNo }}">{{ RollNo }}</option>
+                        </select>
+                        <div *ngIf="validate1.submitted && form1.RollNo.invalid" class="invalid-feedback">
+                            Please Select Student.
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary mb-2" (click)="GetData()" style="width: 200px;">Get Student Marks</button>&nbsp;
+                    <button type="submit" class="btn btn-danger mb-2" (click)="Cancel()" style="width: 150px;">Cancel</button>
+                </div>
+            </div>
+        </form>
+        <div *ngIf="errMsg" class="alert alert-danger alert-dismissible fade show" role="alert" style="width:100%">
+            {{errMsg}}
+        </div>
+        <div *ngIf="successMsg" class="alert alert-success alert-dismissible fade show" role="alert" style="width:100%">
+            {{successMsg}}
+        </div>
+        <div *ngIf="StudentData && StudentData.length > 0">
+            <table class="table table-bordered table-striped mt-2 mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th [width]="80" class="text-center">Sr.No.</th>
+                        <th>Roll Number</th>
+                        <th>Student Name</th>
+                        <th>Class</th>
+                        <th>Exam</th>
+                        <th [width]="80" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let Item of StudentData; let i = index">
+                        <td class="text-center">{{ i + 1 }}</td>
+                        <td>{{ Item.RollNo }}</td>
+                        <td>{{ studentMap[Item.StudentId] || 'N/A' }}</td>
+                        <td>{{ classMap[Item.ClassId] || 'N/A' }}</td>
+                        <td>{{ examMap[Item.ExId] || 'N/A' }}</td>
+                        <td class="text-center"><a class="btn btn-link p-0"  [routerLink]="['/admin/results', Item.StudentId]">View</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

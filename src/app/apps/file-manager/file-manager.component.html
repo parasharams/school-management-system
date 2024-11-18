@@ -1,0 +1,26 @@
+<!-- page title -->
+<app-page-title [breadcrumbItems]="pageTitle" title="File Manager"></app-page-title>
+
+<div class="row">
+    <div class="col">
+        <div class="email-container bg-transparent">
+            <!-- left side bar -->
+            <app-file-left-panel></app-file-left-panel>
+
+            <!-- right side bar -->
+            <div class="inbox-rightbar h-100 pb-0">
+                <app-file-top-panel></app-file-top-panel>
+
+                <!-- quick access -->
+                <app-file-quick-access></app-file-quick-access>
+
+            </div>
+
+            <div class="inbox-rightbar recent-data">
+                <app-file-recent></app-file-recent>
+            </div>
+
+        </div>
+    </div>
+    <!--End col-->
+</div> <!-- End row -->

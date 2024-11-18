@@ -1,0 +1,21 @@
+<h4 class="mt-1 fs-15 fw-bold text-uppercase">Messages</h4>
+<ul class="list-unstyled">
+    <li class="py-2" *ngFor="let message of messages;let i=index" [class.border-bottom]="i<messages.length-1">
+        <div class="d-flex">
+            <div class="me-3 flex-shrink-0" *ngIf="message.avatar">
+                <img [src]="message.avatar" alt="" class="avatar-md rounded-circle">
+            </div>
+            <div class="avatar-md rounded-circle bg-soft-primary me-3 flex-shrink-0" *ngIf="!message.avatar">
+                <span class="fs-18 avatar-title text-primary fw-semibold">{{message.userName![0]}}</span>
+            </div>
+            <div class="flex-grow-1 overflow-hidden">
+                <h5 class="fs-15 mt-2 mb-1"><a href="javascript:void(0)" class="text-dark">{{message.userName}}</a></h5>
+                <p class="text-muted fs-13 text-truncate mb-0">{{message.text}}</p>
+            </div>
+        </div>
+    </li>
+</ul>
+
+<div class="text-center">
+    <a href="javascript:void(0)" class="btn btn-primary btn-sm">Load more</a>
+</div>

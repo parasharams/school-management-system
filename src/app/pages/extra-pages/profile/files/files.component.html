@@ -1,0 +1,27 @@
+<h4 class="mt-1 fs-15 fw-bold text-uppercase">Files</h4>
+
+<div class="card mb-2 shadow-none border" *ngFor="let file of files;let i=index" [class.mt-3]="i==0">
+    <div class="p-1 px-2">
+        <div class="row align-items-center">
+            <div class="col-auto">
+                <img [src]="file.previewImage" class="avatar-sm rounded" alt="file-image">
+            </div>
+            <div class="col ps-0">
+                <a href="javascript:void(0);" class="text-muted fw-bold">{{file.fileName}}</a>
+                <p class="mb-0">{{file.fileSize}}</p>
+            </div>
+            <div class="col-auto">
+                <!-- Button -->
+                <a href="javascript:void(0);" placement="bottom" ngbTooltip="Download"
+                    class="btn btn-link text-muted btn-lg p-0">
+                    <i class='uil uil-cloud-download fs-14'></i>
+                </a>
+                <a href="javascript:void(0);" placement="bottom" ngbTooltip="Delete"
+                    class="btn btn-link text-danger btn-lg p-0">
+                    <i class='uil uil-multiply fs-14'></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end attachments -->

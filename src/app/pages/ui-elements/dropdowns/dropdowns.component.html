@@ -1,0 +1,148 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="header-title mb-1 mt-0">Dropdown Examples</h5>
+                <p class="sub-header">
+                    The best part is you can do this with any button variant, too:
+                </p>
+
+                <ng-container *ngFor="let variant of dropdownVariants1">
+                    <div class="btn-group mt-2 me-1">
+                        <ng-container
+                            *ngTemplateOutlet="DropdownColored;context:{color:variant.color,text:variant.name}">
+                        </ng-container>
+                    </div><!-- /btn-group -->
+                </ng-container>
+
+                <ng-container *ngFor="let variant of dropdownVariants2">
+                    <div class="btn-group mt-2 me-1">
+                        <ng-container
+                            *ngTemplateOutlet="SplitDropdownColored;context:{color:variant.color,text:variant.name}">
+                        </ng-container>
+                    </div><!-- /btn-group -->
+                </ng-container>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="header-title mb-1 mt-0">Dropdown - More Examples</h5>
+                <p class="sub-header">
+                    You can put a form or simple text within a dropdown menu or set the different position
+                </p>
+
+                <div class="btn-group mt-2 me-1" ngbDropdown>
+                    <button class="btn btn-primary" ngbDropdownToggle aria-haspopup="true" aria-expanded="false">
+                        Simple text <i class="icon"><span data-feather="chevron-down"></span></i>
+                    </button>
+                    <div class="dropdown-lg p-3" aria-labelledby="dropdownMenutext" ngbDropdownMenu>
+                        <div class="text-muted">
+                            Some example text that's free-flowing within the dropdown menu.
+                            <p class="mb-0">And this is more example text.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-group mt-2 me-1" ngbDropdown>
+                    <button class="btn btn-secondary" type="button" ngbDropdownToggle aria-haspopup="true"
+                        aria-expanded="false">
+                        Dropdown menu Forms <i class="icon"><span data-feather="chevron-down"></span></i>
+                    </button>
+                    <form class="dropdown-menu dropdown-lg p-3" ngbDropdownMenu>
+                        <div class="mb-3">
+                            <label class="form-label" for="exampleDropdownFormEmail2">Email address</label>
+                            <input type="email" class="form-control" id="exampleDropdownFormEmail2"
+                                placeholder="email@example.com">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="exampleDropdownFormPassword2">Password</label>
+                            <input type="password" class="form-control" id="exampleDropdownFormPassword2"
+                                placeholder="Password">
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="dropdownCheck">
+                                <label class="form-check-label" for="dropdownCheck">Remember me</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </form>
+                </div>
+
+                <div class="btn-group mt-2 me-1" ngbDropdown>
+                    <button type="button" class="btn btn-success" ngbDropdownToggle aria-haspopup="true"
+                        aria-expanded="false">
+                        Right Align <i class="icon"><span data-feather="chevron-down"></span></i>
+                    </button>
+                    <div class="dropdown-menu-end" ngbDropdownMenu>
+                        <a href="javascript:void(0)" ngbDropdownItem>Action</a>
+                        <a href="javascript:void(0)" ngbDropdownItem>Another action</a>
+                        <a href="javascript:void(0)" ngbDropdownItem>Something else here</a>
+                    </div>
+                </div>
+
+                <div class="btn-group mt-2 me-1 dropend" ngbDropdown placement="end-top">
+                    <button type="button" class="btn btn-info" ngbDropdownToggle>
+                        Drop Right <i class="icon"><span data-feather="chevron-right"></span></i>
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="dropdownEnd">
+                        <a href="javascript:void(0)" ngbDropdownItem>Action</a>
+                        <a href="javascript:void(0)" ngbDropdownItem>Another Action</a>
+                        <a href="javascript:void(0)" ngbDropdownItem>Something else is here</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="javascript:void(0)" ngbDropdownItem>Separated link</a>
+                    </div>
+                </div>
+
+                <div class="btn-group mt-2 me-1 dropstart" ngbDropdown [placement]="'start-top'">
+                    <button type="button" class="btn btn-danger" ngbDropdownToggle>
+                        <i class="icon"><span data-feather="chevron-left"></span></i> Drop Left
+                    </button>
+                    <div ngbDropdownMenu>
+                        <a ngbDropdownItem>Action</a>
+                        <a ngbDropdownItem>Another action</a>
+                        <a ngbDropdownItem>Something else here</a>
+                        <div class="dropdown-divider"></div>
+                        <a ngbDropdownItem>Separated link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- reusable template -->
+<ng-template #DropdownColored let-color="color" let-text="text">
+    <div ngbDropdown>
+        <button class="btn btn-{{color}}" id="dropdownBasic1" ngbDropdownToggle>{{text}}<i class="icon"><span
+                    data-feather="chevron-down" appFeatherIcon></span></i></button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <a href="javascript:void(0)" ngbDropdownItem>Action</a>
+            <a href="javascript:void(0)" ngbDropdownItem>Another Action</a>
+            <a href="javascript:void(0)" ngbDropdownItem>Something else is here</a>
+            <div class="dropdown-divider"></div>
+            <a href="javascript:void(0)" ngbDropdownItem>Separated link</a>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #SplitDropdownColored let-color="color" let-text="text">
+    <button type="button" class="btn btn-{{color}}">{{text}}</button>
+    <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+        <button type="button" class="btn btn-{{color}} dropdown-toggle-split" id="dropdownBasic3" ngbDropdownToggle>
+            <i class="icon"><span data-feather="chevron-down" appFeatherIcon></span></i>
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic3">
+            <a ngbDropdownItem>Action</a>
+            <a ngbDropdownItem>Another action</a>
+            <a ngbDropdownItem>Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a ngbDropdownItem>Separated link</a>
+        </div>
+    </div>
+</ng-template>

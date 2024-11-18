@@ -1,0 +1,33 @@
+<app-page-title [breadcrumbItems]="pageTitle" title="Expense Details"></app-page-title>
+<div class="card">
+    <div class="card-body">
+        <!-- <div *ngIf="ExpenseData && ExpenseData.length > 0; else noData">
+            <table class="table table-bordered table-striped mt-2 mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Class</th>
+                        <th>Subject</th>
+                        <th>Fees (Annual)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let Item of ExpenseData; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ classMap[Item.ClassId] || 'N/A' }}</td>
+                        <td>{{ subjectMap[Item.SubjectId] || 'N/A' }}</td>
+                        <td>{{ Item.ChargeAmount }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #noData>
+            <p>No records available.</p>
+        </ng-template> -->
+
+        <app-advanced-table [tableData]="ExpenseData" [columns]="columns" [pagination]="true"
+            [pageSizeOptions]="pageSizeOptions" [hasRowSelection]="true" [isSearchable]="true"
+            (search)="searchData($event)" [isSortable]="true" (sort)="onSort($event)">
+        </app-advanced-table>
+    </div>
+</div>

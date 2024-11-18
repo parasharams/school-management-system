@@ -1,0 +1,74 @@
+<h4 class="mt-1 fs-15 fw-bold text-uppercase">Projects</h4>
+
+<div class="row mt-3">
+    <div class="col-xxl-4 col-md-6" *ngFor="let project of projects">
+        <div class="card border">
+            <div class="card-body">
+                <div class="badge bg-success float-end" *ngIf="project.state === 'Completed'">
+                    {{project.state}}</div>
+                <div class="badge bg-warning float-end" *ngIf="project.state === 'Pending'">
+                    {{project.state}}</div>
+                <p class="text-success text-uppercase fs-12 mb-2">{{project.technology}}</p>
+                <h5><a [routerLink]="['../details']" [queryParams]="{id:project.id}"
+                        class="text-dark">{{project.title}}</a></h5>
+                <p class="text-muted mb-4">{{project.shortDesc}}</p>
+
+                <div>
+                    <ng-container *ngFor="let member of getDisplayMembersList(project.teamMembers)">
+                        <a href="javascript: void(0);">
+                            <img [src]="member.image" alt="" class="avatar-sm m-1 rounded-circle" *ngIf="member.image">
+                            <div class="avatar-sm fw-bold d-inline-block m-1" *ngIf="member.variant">
+                                <span
+                                    class="avatar-title rounded-circle bg-soft-{{member.variant}} text-{{member.variant}}">{{member.name[0]}}</span>
+                            </div>
+                        </a>
+                    </ng-container>
+                    <a href="javascript: void(0);" *ngIf="project.teamMembers.length!>modifiedTeamMembers.length">
+                        <div class="avatar-sm fw-bold d-inline-block m-1">
+                            <span
+                                class="avatar-title rounded-circle bg-soft-warning text-warning">{{project.teamMembers.length-displayCount}}+</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="card-body border-top">
+                <div>
+                    <div>
+                        <ul class="list-inline">
+                            <li class="list-inline-item pe-2">
+                                <a href="javascript:void(0)" class="text-muted d-inline-block" placement="top"
+                                    ngbTooltip="Due date">
+                                    <i class="uil uil-calender me-1"></i> {{project.endDate}}
+                                </a>
+                            </li>
+                            <li class="list-inline-item pe-2">
+                                <a href="javascript:void(0)" class="text-muted d-inline-block" placement="top"
+                                    ngbTooltip="Tasks">
+                                    <i class="uil uil-bars me-1"></i> {{project.totalTasks}}
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="javascript:void(0)" class="text-muted d-inline-block" placement="top"
+                                    ngbTooltip="Comments">
+                                    <i class="uil uil-comments-alt me-1"></i> {{project.totalComments}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pt-2">
+                        <ngb-progressbar type="success" class="mt-4 mt-sm-0" [value]="project.progress!" height="5px"
+                            placement="top" ngbTooltip="{{project.progress}}% completed"
+                            *ngIf="project.state === 'Completed'">
+                        </ngb-progressbar>
+                        <ngb-progressbar type="warning" class="mt-4 mt-sm-0" [value]="project.progress!" height="5px"
+                            placement="top" ngbTooltip="{{project.progress}}% completed"
+                            *ngIf="project.state === 'Pending'">
+                        </ngb-progressbar>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end card -->
+    </div>
+</div>
+<!-- end row -->

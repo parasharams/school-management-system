@@ -1,0 +1,81 @@
+<app-page-title [breadcrumbItems]="pageTitle" title="Teacher Subjects"></app-page-title>
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="Form" #validate1="ngForm">
+            <div class="row align-items-end">
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Class</label>
+                        <select class="form-select" formControlName="ClassId" (change)="onChangeClass()" required >
+                            <option value="" selected>Select Class</option>
+                            <option *ngFor="let Item of ClassData; let i = index" value="{{ Item.ClassId }}">{{ Item.ClassName }}</option>
+                        </select>
+                        <div *ngIf="validate1.submitted && form1.ClassId.invalid" class="invalid-feedback">
+                            Please Select Class.
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Subject</label>
+                        <select class="form-select" formControlName="SubjectId" required >
+                            <option value="" selected>Select Subject</option>
+                            <option *ngFor="let Item of SubjectListData; let i = index" value="{{ Item.SubjectId }}">{{ Item.SubjectName }}</option>
+                        </select>
+                        <div *ngIf="validate1.submitted && form1.SubjectId.invalid" class="invalid-feedback">
+                            Please Select Subject.
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-3">
+                        <label class="form-label">Teacher</label>
+                        <select class="form-select" formControlName="TeacherId" required >
+                            <option value="" selected>Select Teacher</option>
+                            <option *ngFor="let Item of TeacherData; let i = index" value="{{ Item.TeacherId }}">{{ Item.TeacherName }}</option>
+                        </select>
+                        <div *ngIf="validate1.submitted && form1.TeacherId.invalid" class="invalid-feedback">
+                            Please Select Teacher.
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button *ngIf="!isEditing" type="submit" (click)="Create()" class="btn btn-primary mb-2" style="width: 200px;">Assign Subject</button>
+                    <button *ngIf="isEditing" type="submit" (click)="Update()" class="btn btn-info mb-2" style="width: 200px;">Update Teacher Subject</button>&nbsp;
+                    <button *ngIf="isEditing" type="submit" (click)="Cancel()" class="btn btn-danger mb-2" style="width: 150px;">Cancel</button>
+                </div>
+            </div>
+        </form>
+        <div *ngIf="errMsg" class="alert alert-danger alert-dismissible fade show" role="alert" style="width:100%">
+            {{errMsg}}
+        </div>
+        <div *ngIf="successMsg" class="alert alert-success alert-dismissible fade show" role="alert" style="width:100%">
+            {{successMsg}}
+        </div>
+        <div *ngIf="TeacherSubData && TeacherSubData.length > 0; else noData">
+            <table class="table table-bordered table-striped mt-2 mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th [width]="50" class="text-center">Sr.No.</th>
+                        <th>Class</th>
+                        <th>Subject</th>
+                        <th>Teacher</th>
+                        <th [width]="110" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let Item of TeacherSubData; let i = index">
+                        <td class="text-center">{{ i + 1 }}</td>
+                        <td>{{ classMap[Item.ClassId] || 'N/A' }}</td>
+                        <td>{{ subjectMap[Item.SubjectId] || 'N/A' }}</td>
+                        <td>{{ teacherMap[Item.TeacherId] || 'N/A' }}</td>
+                        <td class="text-center"><a class="btn btn-link btn-sm p-0" (click)="Edit(Item.Id )">Edit</a> | <a class="btn btn-link btn-sm p-0" (click)="Delete(Item.Id )">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #noData>
+            <p>No records available.</p>
+        </ng-template>
+    </div>
+</div>

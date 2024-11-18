@@ -1,0 +1,116 @@
+
+<app-page-title [breadcrumbItems]="pageTitle" title="Exam List"></app-page-title>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-end mb-2">   
+                    <button class="btn btn-primary" (click)="open(FormModal)">Add Student Marks</button>
+                </div>
+                <div *ngIf="errMsg" class="alert alert-danger alert-dismissible fade show" role="alert"
+                    style="width:100%">
+                    <strong>{{errMsg}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div *ngIf="successMsg" class="alert alert-success alert-dismissible fade show" role="alert"
+                    style="width:100%">
+                    <strong>{{successMsg}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped mb-0">
+                        <thead class="table-light">
+                          <tr>
+                            <th scope="col">Generated ID</th>
+                            <th scope="col">Year</th>
+                            <th scope="col">Exam</th>
+                            <th scope="col">Class</th>
+                            <th scope="col">Student</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let sub of groupedExamResults">
+                            <td><button class="btn btn-link btn-sm">{{ sub.MarkId }}</button></td>
+                            <td>{{ yearMap[sub.examYear] || 'N/A' }}</td>
+                            <td>{{ examMap[sub.examName] || 'N/A' }}</td>
+                            <td>{{ classMap[sub.className] || 'N/A' }}</td>
+                            <td>{{ studMap[sub.studName] || 'N/A' }}</td>
+                            <td>
+                                <button class="btn btn-info btn-sm" style="padding: 2px 7px;" (click)="edit(FormModal, sub.submarkId)"><i class="bi bi-pencil-square" style="font-size: 14px;"></i></button>&nbsp;
+                                <button class="btn btn-danger btn-sm" style="padding: 2px 7px;" (click)="delete(sub.examId)"><i class="bi bi-trash" style="font-size: 14px;"></i></button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #FormModal let-modal>
+    <div class="modal-header">
+        <h4 *ngIf="!isEditing" class="modal-title" id="modalLabel">Add Student Marks</h4>
+                <h4 *ngIf="isEditing" class="modal-title" id="modalLabel">Edit Student Marks</h4>
+        <button type="button" class="btn-close" id="cancel" (click)="modal.dismiss('Cross click')"
+            style="margin-left: 0;">
+        </button>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="errMsg" class="alert alert-danger alert-dismissible fade show" role="alert" style="width:100%">
+            <strong>{{errMsg}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div *ngIf="successMsg" class="alert alert-success alert-dismissible fade show" role="alert" style="width:100%">
+            <strong>{{successMsg}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="form-group mb-2">
+            <label class="form-label">Select Year</label>
+            <select2 [data]="years" placeholder="Select Year" [formControl]="yearControl" id="selec2-year"></select2>
+        </div>
+        <div class="form-group mb-2" *ngIf="selectedYearId">
+            <label class="form-label">Select Class</label>
+            <select2 [data]="classes" placeholder="Select Class" [formControl]="classControl" id="selec2-class"></select2>
+        </div>
+        <div class="form-group mb-2" *ngIf="selectedClassId">
+            <label class="form-label">Select Exam</label>
+            <select2 [data]="exams" placeholder="Select Exam" [formControl]="examControl" id="selec2-exam"></select2>
+        </div>
+        <div class="form-group mb-2" *ngIf="selectedExamId">
+            <label class="form-label">Select Student</label>
+            <select2 [data]="students" placeholder="Select Student" [formControl]="studControl" id="selec2-stud"></select2>
+        </div>
+        <form [formGroup]="subForm">
+            <div class="table-responsive pt-2 mb-2" *ngIf="selectedStudId">
+                <table class="table table-bordered table-striped mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">Subject Name</th>
+                            <th scope="col">Obtained Marks</th>
+                            <th scope="col">Marks</th>
+                        </tr>
+                    </thead>
+                    <tbody formArrayName="subjectList">
+                        <tr *ngFor="let sub of subjectList.controls; let i = index" [formGroupName]="i">
+                          <td>{{ getSubnameById(sub.value.subject) }}</td>
+                          <td>{{ sub.value.obtainedmark }}</td>
+                          <td><input type="number" class="form-control" formControlName="mark" /></td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Total</th>
+                            <th scope="col">{{ getTotalObtainedMarks() }}</th>
+                            <th scope="col">{{ getTotalGotMarks() }}</th>
+                          </tr>
+                      </tbody>
+                </table>
+            </div>
+            <div class="form-group text-center" *ngIf="!isEditing">
+                <button class="btn btn-success" type="submit" (click)="create()">Submit</button>
+            </div>
+            <div class="form-group text-center" *ngIf="isEditing">
+                <button class="btn btn-primary" type="submit" (click)="update()">Update</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

@@ -1,0 +1,8 @@
+<div class="d-flex p-3 border-bottom">
+    <div class="flex-grow-1">
+        <h4 class="mt-0 mb-1 fs-22" *ngIf="!isNaN(stats)">{{stats | number}}</h4>
+        <h4 class="mt-0 mb-1 fs-22" *ngIf="isNaN(stats)">{{stats}}</h4>
+        <span class="text-muted">{{title}}</span>
+    </div>
+    <i [attr.data-feather]="icon" appFeatherIcon class="align-self-center icon-dual {{iconClass}}"></i>
+</div>

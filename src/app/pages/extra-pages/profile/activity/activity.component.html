@@ -1,0 +1,21 @@
+<ng-container *ngFor="let activity of activities;let i=index">
+    <h5 [class]="i==0 ? 'mt-1' : 'mt-4'">{{activity.activityTime}}</h5>
+    <div class="left-timeline mt-3 ps-3" [class.mb-3]="i==0">
+        <ul class="list-unstyled events mb-0">
+            <li class="event-list" *ngFor="let item of activity.activities">
+                <div class="pb-4">
+                    <div class="d-flex">
+                        <div class="event-date text-center me-4 flex-shrink-0">
+                            <div class="bg-soft-primary p-1 rounded text-primary fs-14">{{item.hours | number: '2.0'}}
+                                hours ago</div>
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="fs-15 mt-0 mb-1">{{item.title}}</h6>
+                            <p class="text-muted fs-14">{{item.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</ng-container>

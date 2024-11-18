@@ -1,0 +1,20 @@
+<!-- page title -->
+<app-page-title [breadcrumbItems]="pageTitle" title="Calendar"></app-page-title>
+<!-- welcome card -->
+<app-calendar-welcome-card (createNewEvent)="createNewEvent()"></app-calendar-welcome-card>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div id="calendar">
+                    <full-calendar #calendar [options]="calendarOptions"></full-calendar>
+                </div>
+            </div> <!-- end card body-->
+        </div> <!-- end card -->
+        <app-calendar-event #eventModal (eventSaved)="handleEventSave($event)"
+            (eventDeleted)="handleEventDelete($event)">
+        </app-calendar-event>
+    </div>
+    <!-- end col-12 -->
+</div> <!-- end row -->

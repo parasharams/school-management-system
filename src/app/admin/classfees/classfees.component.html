@@ -1,0 +1,65 @@
+<app-page-title [breadcrumbItems]="pageTitle" title="Class Fees"></app-page-title>
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="Form" #validate1="ngForm">
+            <div class="row align-items-end">
+                <div class="col-md-4">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Class Name</label>
+                        <select class="form-select" formControlName="ClassId" placeholder="Enter Class Name" required >
+                            <option value="" selected>Select Class</option>
+                            <option *ngFor="let Item of ClassData; let i = index" value="{{ Item.ClassId }}">{{ Item.ClassName }}</option>
+                        </select>
+                        <div *ngIf="validate1.submitted && form1.ClassId.invalid" class="invalid-feedback">
+                            Please Select Class Name.
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Fees Amount</label>
+                        <input type="number" class="form-control" formControlName="FeesAmount" placeholder="Enter Fees Amount" required />
+                        <div *ngIf="validate1.submitted && form1.FeesAmount.invalid" class="invalid-feedback">
+                            Please enter Fees Amount.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <button *ngIf="!isEditing" type="submit" (click)="Create()" class="btn btn-primary mb-2" style="width: 150px;">Add Fees</button>
+                    <button *ngIf="isEditing" type="submit" (click)="Update()" class="btn btn-info mb-2" style="width: 150px;">Update Fees</button>&nbsp;
+                    <button *ngIf="isEditing" type="submit" (click)="Cancel()" class="btn btn-danger mb-2" style="width: 150px;">Cancel</button>
+                </div>
+            </div>
+        </form>
+        <div *ngIf="errMsg" class="alert alert-danger alert-dismissible fade show" role="alert" style="width:100%">
+            {{errMsg}}
+        </div>
+        <div *ngIf="successMsg" class="alert alert-success alert-dismissible fade show" role="alert" style="width:100%">
+            {{successMsg}}
+        </div>
+        <div *ngIf="FeesData && FeesData.length > 0; else noData">
+            <table class="table table-bordered table-striped mt-2 mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Sr.No.</th>
+                        <th>Class</th>
+                        <th>Fees (Annual)</th>
+                        <th [width]="150">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let Item of FeesData; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <!-- <td>{{ Item.FeesId }}</td> -->
+                        <td>{{ classMap[Item.ClassId] || 'N/A' }}</td>
+                        <td>{{ Item.FeesAmount }}</td>
+                        <td><a class="btn btn-link btn-sm p-0" (click)="Edit(Item.FeesId)">Edit</a> | <a class="btn btn-link btn-sm p-0" (click)="Delete(Item.FeesId)">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #noData>
+            <p>No records available.</p>
+        </ng-template>
+    </div>
+</div>

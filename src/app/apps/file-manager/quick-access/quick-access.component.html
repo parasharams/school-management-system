@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-12">
+        <h6 class="fs-18">Folders</h6>
+        <div class="row">
+            <div class="col-xxl-3 col-lg-6" *ngFor="let item of quickAccessItems">
+                <div class="card shadow-none border">
+                    <div class="p-2">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <div class="avatar-sm">
+                                    <span
+                                        class="avatar-title bg-soft-{{item.variant}} text-{{item.variant}} rounded fs-24">
+                                        <i [class]="item.icon"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col ps-1">
+                                <a href="javascript:void(0);" class="text-muted fw-bold fs-15">{{item.name}}</a>
+                                <p class="mb-0 fs-13">{{item.size}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

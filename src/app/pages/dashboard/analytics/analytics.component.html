@@ -1,0 +1,473 @@
+<!-- page title -->
+<app-page-title [breadcrumbItems]="pageTitle" title="Analytics" windowTitle="Dashboard Analytics"></app-page-title>
+
+<div class="row">
+    <div class="col-xl-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="float-end" ngbDropdown placement="bottom-end">
+                    <a ngbDropdownToggle class="arrow-none p-0 text-dark" id="analyticsDropdown"
+                        href="javascript:void(0)" aria-expanded="false">
+                        <i class="uil uil-ellipsis-v fs-13"></i>
+                    </a>
+                    <div ngbDropdownMenu class="dropdown-menu-end" aria-labelledby="analyticsDropdown">
+                        <!-- item-->
+                        <a ngbDropdownItem>
+                            <i class="uil uil-refresh me-2"></i>Refresh Report
+                        </a>
+                        <!-- item-->
+                        <a ngbDropdownItem>
+                            <i class="uil uil-export me-2"></i>Export Report
+                        </a>
+                    </div>
+                </div>
+
+                <h4 class="card-title header-title" i18n>Overviews</h4>
+                <div class="row">
+                    <div class="col">
+                        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs d-block d-sm-flex">
+                            <li [ngbNavItem]="'subscribers'">
+                                <a ngbNavLink>
+                                    <h6 class="text-muted fs-14" i18n>Subscribers</h6>
+                                    <h3>786</h3>
+                                </a>
+                                <ng-template ngbNavContent>
+                                    <div dir="ltr">
+                                        <div id="overviews1">
+                                            <apx-chart class="apex-charts" [chart]="subscriberChart.chart!"
+                                                [dataLabels]="subscriberChart.dataLabels!"
+                                                [series]="subscriberChart.series!" [stroke]="subscriberChart.stroke!"
+                                                [responsive]="subscriberChart.responsive!"
+                                                [tooltip]="subscriberChart.tooltip!"
+                                                [markers]="subscriberChart.markers!" [colors]="subscriberChart.colors!"
+                                                [grid]="subscriberChart.grid!" [fill]="subscriberChart.fill!"
+                                                [yaxis]="subscriberChart.yaxis!" [xaxis]="subscriberChart.xaxis!"
+                                                *ngIf="subscriberChart">
+                                            </apx-chart>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </li>
+                            <li [ngbNavItem]="'views'">
+                                <a ngbNavLink>
+                                    <h6 class="text-muted fs-14" i18n>Total views</h6>
+                                    <h3>1.356</h3>
+                                </a>
+                                <ng-template ngbNavContent>
+                                    <div dir="ltr">
+                                        <div id="overviews2">
+                                            <apx-chart class="apex-charts" [chart]="totalViewsChart.chart!"
+                                                [series]="totalViewsChart.series!" [stroke]="totalViewsChart.stroke!"
+                                                [responsive]="totalViewsChart.responsive!"
+                                                [tooltip]="totalViewsChart.tooltip!" [labels]="totalViewsChart.labels!"
+                                                [colors]="totalViewsChart.colors!" [grid]="totalViewsChart.grid!"
+                                                [fill]="totalViewsChart.fill!" [yaxis]="totalViewsChart.yaxis!"
+                                                [legend]="totalViewsChart.legend!" *ngIf="totalViewsChart">
+                                            </apx-chart>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </li>
+                            <li [ngbNavItem]="'bounce-rate'">
+                                <a ngbNavLink>
+                                    <h6 class="text-muted fs-14" i18n>Bounce rate</h6>
+                                    <h3>87%</h3>
+                                </a>
+                                <ng-template ngbNavContent>
+                                    <div dir="ltr">
+                                        <div id="overviews3">
+                                            <apx-chart class="apex-charts" [chart]="bounceRateChart.chart!"
+                                                [dataLabels]="bounceRateChart.dataLabels!"
+                                                [series]="bounceRateChart.series!" [stroke]="bounceRateChart.stroke!"
+                                                [markers]="bounceRateChart.markers!" [colors]="bounceRateChart.colors!"
+                                                [grid]="bounceRateChart.grid!" [legend]="bounceRateChart.legend!"
+                                                [yaxis]="bounceRateChart.yaxis!" [xaxis]="bounceRateChart.xaxis!"
+                                                *ngIf="bounceRateChart">
+                                            </apx-chart>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div [ngbNavOutlet]="nav"></div>
+                    </div>
+                </div>
+            </div>
+            <!--end card body-->
+        </div>
+        <!--end card-->
+    </div>
+    <!--end col-->
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="float-end" ngbDropdown placement="bottom-end">
+                    <a ngbDropdownToggle class="arrow-none p-0 text-dark" id="analyticsDropdown"
+                        href="javascript:void(0)" aria-expanded="false">
+                        <i class="uil uil-ellipsis-v fs-13"></i>
+                    </a>
+                    <div ngbDropdownMenu class="dropdown-menu-end" aria-labelledby="analyticsDropdown">
+                        <!-- item-->
+                        <a ngbDropdownItem>
+                            <i class="uil uil-refresh me-2"></i>Refresh Report
+                        </a>
+                        <!-- item-->
+                        <a ngbDropdownItem>
+                            <i class="uil uil-export me-2"></i>Export Report
+                        </a>
+                    </div>
+                </div>
+
+                <h4 class="card-title header-title" i18n>New Users</h4>
+                <!-- user statistics item -->
+                <app-chart-statistics-two-widget containerClass="border-bottom pt-2 pb-3" title="New users this week"
+                    userCount="18 324" subValue="+17.98%" variant="success" chartType="bar"
+                    [chartData]="[25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54]" [chartColors]="['#43d39e']">
+                </app-chart-statistics-two-widget>
+                <!-- user statistics item -->
+                <app-chart-statistics-two-widget containerClass="border-bottom py-3" title="New users this month"
+                    userCount="182 578" subValue="+24.98%" variant="success" chartType="line"
+                    [chartData]="[25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54]" [chartColors]="['#ff5c75']">
+                </app-chart-statistics-two-widget>
+                <!-- user statistics item -->
+                <app-chart-statistics-two-widget containerClass="border-bottom py-3" title="New users this year"
+                    userCount="24 182 579" subValue="+39.52%" variant="success" chartType="bar"
+                    [chartData]="[25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54]" [chartColors]="['#43d39e']">
+                </app-chart-statistics-two-widget>
+                <!-- user statistics item -->
+                <app-chart-statistics-two-widget containerClass="pb-2 pt-3" title="Returning users" userCount="82 578"
+                    subValue="-26.47%" variant="danger" chartType="line"
+                    [chartData]="[25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54]" [chartColors]="['#ff5c75']">
+                </app-chart-statistics-two-widget>
+            </div>
+            <!--end card body-->
+        </div>
+        <!--end card-->
+    </div>
+    <!--end col-->
+</div>
+<!--end row-->
+
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body pb-1">
+                <div class="float-end" ngbDropdown placement="bottom-end">
+                    <a ngbDropdownToggle class="arrow-none p-0 text-dark" id="analyticsDropdown"
+                        href="javascript:void(0)" aria-expanded="false">
+                        <i class="uil uil-ellipsis-v fs-13"></i>
+                    </a>
+                    <div ngbDropdownMenu class="dropdown-menu-end" aria-labelledby="analyticsDropdown">
+                        <!-- item-->
+                        <a ngbDropdownItem>
+                            <i class="uil uil-refresh me-2"></i>Refresh Report
+                        </a>
+                        <!-- item-->
+                        <a ngbDropdownItem>
+                            <i class="uil uil-export me-2"></i>Export Report
+                        </a>
+                    </div>
+                </div>
+
+                <h4 class="card-title header-title" i18n>Social Media Traffic</h4>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div dir="ltr">
+                            <div id="session-os">
+                                <apx-chart class="apex-charts" [chart]="mediaTrafficChart.chart!"
+                                    [dataLabels]="mediaTrafficChart.dataLabels!" [series]="mediaTrafficChart.series!"
+                                    [plotOptions]="mediaTrafficChart.plotOptions!"
+                                    [tooltip]="mediaTrafficChart.tooltip!" [colors]="mediaTrafficChart.colors!"
+                                    [grid]="mediaTrafficChart.grid!" [legend]="mediaTrafficChart.legend!"
+                                    [fill]="mediaTrafficChart.fill!" [xaxis]="mediaTrafficChart.xaxis!"
+                                    *ngIf="mediaTrafficChart">
+                                </apx-chart>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 offset-1 my-3">
+                        <div class="border-bottom">
+                            <div class="my-2 py-2">
+                                <h6 class="fs-14 text-muted" i18n>Twitter</h6>
+                                <h3>2250k</h3>
+                            </div>
+                        </div>
+                        <div class="border-bottom">
+                            <div class="my-2 py-2">
+                                <h6 class="fs-14 text-muted" i18n>Instagram</h6>
+                                <h3>1501k</h3>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="my-2 py-2">
+                                <h6 class="fs-14 text-muted" i18n>Facebook</h6>
+                                <h3>750k</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end card body-->
+        </div>
+        <!--end card-->
+    </div>
+    <!--end col-->
+    <div class="col-xl-6">
+        <div class="row">
+            <div class="col-md-6 ">
+                <div class="card">
+                    <div class="card-body">
+                        <a [routerLink]="'.'" class="p-0 float-end">Export <i class="uil uil-export ms-1"></i></a>
+                        <h4 class="card-title header-title" i18n>Sources</h4>
+                        <div class="table-responsive table-nowrap mt-3">
+                            <table class="table table-sm table-centered mb-0 fs-13">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th i18n>Types</th>
+                                        <th style="width: 30%;" i18n>Sessions</th>
+                                        <th style="width: 30%;" i18n>Views</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let source of sourceList">
+                                        <td>{{source.types}}</td>
+                                        <td>{{source.sessions | number}}</td>
+                                        <td>{{source.views | number}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--end card body-->
+                </div>
+                <!--end card-->
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <a [routerLink]="'.'" class="p-0 float-end">Export <i class="uil uil-export ms-1"></i></a>
+                        <h4 class="card-title header-title" i18n>Engagement Overviews</h4>
+                        <div class="table-responsive table-nowrap mt-3">
+                            <table class="table table-sm table-centered mb-0 fs-13">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th i18n>Duration (Secs)</th>
+                                        <th style="width: 30%;" i18n>Sessions</th>
+                                        <th style="width: 30%;" i18n>Views</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of engagementOverviews">
+                                        <td>{{item.duration}}</td>
+                                        <td>{{item.sessions | number}}</td>
+                                        <td>{{item.views | number}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--end card body-->
+                </div>
+                <!--end card-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <a [routerLink]="'.'" class="p-0 float-end">Export <i class="uil uil-export ms-1"></i></a>
+                        <h4 class="card-title header-title" i18n>Platforms</h4>
+                        <div class="table-responsive table-nowrap mt-3">
+                            <table class="table table-sm table-centered mb-0 fs-13">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th i18n>System</th>
+                                        <th i18n>Visits</th>
+                                        <th style="width: 40%;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let platform of platformList">
+                                        <td>{{platform.system}}</td>
+                                        <td>{{platform.visits | number}}</td>
+                                        <td>
+                                            <ngb-progressbar type="primary" [value]="platform.progress" height="3px">
+                                            </ngb-progressbar>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--end card body-->
+                </div>
+                <!--end card-->
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <a [routerLink]="'.'" class="p-0 float-end">Export <i class="uil uil-export ms-1"></i></a>
+                        <h4 class="card-title header-title" i18n>Channels</h4>
+                        <div class="table-responsive table-nowrap mt-3">
+                            <table class="table table-sm table-centered mb-0 fs-13">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th i18n>Channel</th>
+                                        <th i18n>Visits</th>
+                                        <th style="width: 40%;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let channel of channelList">
+                                        <td>{{channel.channel}}</td>
+                                        <td>{{channel.visits | number}}</td>
+                                        <td>
+                                            <ngb-progressbar [type]="channel.variant ? channel.variant : 'primary'"
+                                                [value]="channel.progress" height="3px">
+                                            </ngb-progressbar>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!--end card body-->
+                </div>
+                <!--end card-->
+            </div>
+        </div>
+    </div>
+    <!--end col-->
+</div>
+<!--end row-->
+
+<div class="row">
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="card-body">
+                <a [routerLink]="'.'" class="p-0 float-end">Export <i class="uil uil-export ms-1"></i></a>
+                <h4 class="card-title header-title" i18n>Views Per Minute</h4>
+                <div class="table-responsive table-nowrap mt-2">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th i18n>Page</th>
+                                <th i18n>Bounce Rate</th>
+                                <th i18n>Traffic Type</th>
+                                <!-- <th>Status</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let view of viewDetails">
+                                <td><a href="javascript:void(0);" class="text-muted">{{view.page}}</a>
+                                </td>
+                                <td>{{view.bounce_rate}}</td>
+                                <td>
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item"><i class="uil uil-desktop"></i></li>
+                                        <li class="list-inline-item"><i class="uil uil-mobile-android-alt"></i></li>
+                                        <li class="list-inline-item"><i class="uil uil-tablet"></i></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--end card body-->
+        </div>
+        <!--end card-->
+    </div>
+    <!--end col-->
+    <div class="col-lg-6 col-xl-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="float-end" ngbDropdown placement="bottom-end">
+                    <a ngbDropdownToggle class="arrow-none p-0 text-dark" id="analyticsDropdown"
+                        href="javascript:void(0)" aria-expanded="false">
+                        <i class="uil uil-ellipsis-v fs-13"></i>
+                    </a>
+                    <div ngbDropdownMenu class="dropdown-menu-end" aria-labelledby="analyticsDropdown">
+                        <!-- item-->
+                        <a ngbDropdownItem>
+                            <i class="uil uil-refresh me-2"></i>Refresh Report
+                        </a>
+                        <!-- item-->
+                        <a ngbDropdownItem>
+                            <i class="uil uil-export me-2"></i>Export Report
+                        </a>
+                    </div>
+                </div>
+
+                <h4 class="card-title header-title" i18n>Session by Locations</h4>
+                <div class="my-3">
+                    <app-widget-world-map mapId="world-map-markers" height="407px" width="100%"
+                        [options]="worldMapConfig">
+                    </app-widget-world-map>
+                </div>
+            </div>
+            <!--end card body-->
+        </div>
+        <!--end card-->
+    </div>
+    <!--end col-->
+    <div class="col-lg-6 col-xl-4">
+        <div class="card">
+            <div class="card-body">
+                <div class="float-end" ngbDropdown placement="bottom-end">
+                    <a ngbDropdownToggle class="arrow-none p-0 text-dark" id="analyticsDropdown"
+                        href="javascript:void(0)" aria-expanded="false">
+                        <i class="uil uil-ellipsis-v fs-13"></i>
+                    </a>
+                    <div ngbDropdownMenu class="dropdown-menu-end" aria-labelledby="analyticsDropdown">
+                        <!-- item-->
+                        <a ngbDropdownItem>
+                            <i class="uil uil-refresh me-2"></i>Refresh Report
+                        </a>
+                        <!-- item-->
+                        <a ngbDropdownItem>
+                            <i class="uil uil-export me-2"></i>Export Report
+                        </a>
+                    </div>
+                </div>
+
+                <h4 class="card-title header-title" i18n>Session by Browser</h4>
+                <div class="my-3" dir="ltr">
+                    <div id="session-browser">
+                        <apx-chart class="apex-charts" [chart]="browserChart.chart!" [series]="browserChart.series!"
+                            [plotOptions]="browserChart.plotOptions!" [colors]="browserChart.colors!"
+                            [labels]="browserChart.labels!" [legend]="browserChart.legend!"
+                            [responsive]="browserChart.responsive!" *ngIf="browserChart">
+                        </apx-chart>
+                    </div>
+                </div>
+                <div>
+                    <p class="mb-1">
+                        <i class="uil uil-square text-primary me-1"></i> Safari
+                        <span class="float-end">32.8%</span>
+                    </p>
+                    <p class="mb-1">
+                        <i class="uil uil-square text-success me-1"></i> Firefox
+                        <span class="float-end">16.5%</span>
+                    </p>
+                    <p class="mb-1">
+                        <i class="uil uil-square text-danger me-1"></i> Chrome
+                        <span class="float-end">38.3%</span>
+                    </p>
+                    <p class="mb-0">
+                        <i class="uil uil-square text-warning me-1"></i> Internet Explorer
+                        <span class="float-end">12.4%</span>
+                    </p>
+                </div>
+            </div>
+            <!--end card body-->
+        </div>
+        <!--end card-->
+    </div>
+    <!--end col-->
+</div>
+<!--end row-->

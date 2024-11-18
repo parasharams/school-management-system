@@ -1,0 +1,68 @@
+{
+  "student": [
+  ],
+  "class": [
+    {
+      "id": 1,
+      "classname": "First Year",
+      "description": "First Year",
+      "schoolyear": "2023"
+    },
+    {
+      "id": 2,
+      "classname": "Second Year",
+      "description": "Second Year",
+      "schoolyear": "2023"
+    },
+    {
+      "id": 3,
+      "classname": "Third Year",
+      "description": "Third Year",
+      "schoolyear": "2023"
+    }
+  ],
+  "subject": [
+    {
+      "id": 1,
+      "subjectname": "Marathi",
+      "classname": "First Year",
+      "teachername": " e Bloggs"
+    },
+    {
+      "id": 2,
+      "subjectname": "Hindi",
+      "classname": "First Year",
+      "teachername": " Mahadev Sawant"
+    },
+    {
+      "id": 3,
+      "subjectname": "Marathi",
+      "classname": "First Year",
+      "teachername": " Mahadev Sawant"
+    }
+  ],
+  "teacher": [
+    {
+      "id": 1,
+      "tfname": "",
+      "tmname": "e",
+      "tlname": "Bloggs",
+      "tgender": "1",
+      "tdob": "",
+      "taddress": "Ambegaon Pathar",
+      "temail": "pms@gmail.com",
+      "tpassword": "123456"
+    },
+    {
+      "id": 2,
+      "tfname": "",
+      "tmname": "Mahadev",
+      "tlname": "Sawant",
+      "tgender": "1",
+      "tdob": "",
+      "taddress": "Ambegaon Pathar",
+      "temail": "pxsxvxnx9x@gmail.com",
+      "tpassword": "33333333"
+    }
+  ]
+}

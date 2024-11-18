@@ -1,0 +1,120 @@
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="header-title mb-3 mt-0">Nav Tabs</h5>
+
+                <ul ngbNav #nav1="ngbNav" [activeId]="2" class="nav-tabs">
+                    <li [ngbNavItem]="1">
+                        <a ngbNavLink>
+                            <span class="d-block d-sm-none"><i class="uil-home-alt"></i></span>
+                            <span class="d-none d-sm-block">Home</span>
+                        </a>
+                        <ng-template ngbNavContent>
+                            <ng-container *ngTemplateOutlet="Tab1"></ng-container>
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="2">
+                        <a ngbNavLink>
+                            <span class="d-block d-sm-none"><i class="uil-user"></i></span>
+                            <span class="d-none d-sm-block">Profile</span>
+                        </a>
+                        <ng-template ngbNavContent>
+                            <ng-container *ngTemplateOutlet="Tab2"></ng-container>
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="3">
+                        <a ngbNavLink>
+                            <span class="d-block d-sm-none"><i class="uil-envelope"></i></span>
+                            <span class="d-none d-sm-block">Messages</span>
+                        </a>
+                        <ng-template ngbNavContent>
+                            <ng-container *ngTemplateOutlet="Tab3"></ng-container>
+                        </ng-template>
+                    </li>
+                </ul>
+
+                <div [ngbNavOutlet]="nav1" class=" p-3 text-muted"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="header-title mb-4 mt-0">Nav Pills</h5>
+
+
+                <ul ngbNav #nav2="ngbNav" [activeId]="2" class="nav-pills navtab-bg nav-justified p-1">
+                    <li [ngbNavItem]="1">
+                        <a ngbNavLink>
+                            <span class="d-block d-sm-none"><i class="uil-home-alt"></i></span>
+                            <span class="d-none d-sm-block">Home</span>
+                        </a>
+                        <ng-template ngbNavContent>
+                            <ng-container *ngTemplateOutlet="Tab1"></ng-container>
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="2">
+                        <a ngbNavLink>
+                            <span class="d-block d-sm-none"><i class="uil-user"></i></span>
+                            <span class="d-none d-sm-block">Profile</span>
+                        </a>
+                        <ng-template ngbNavContent>
+                            <ng-container *ngTemplateOutlet="Tab2"></ng-container>
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="3">
+                        <a ngbNavLink>
+                            <span class="d-block d-sm-none"><i class="uil-envelope"></i></span>
+                            <span class="d-none d-sm-block">Messages</span>
+                        </a>
+                        <ng-template ngbNavContent>
+                            <ng-container *ngTemplateOutlet="Tab3"></ng-container>
+                        </ng-template>
+                    </li>
+                </ul>
+                <div [ngbNavOutlet]="nav2" class="text-muted"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end row -->
+
+<!-- reusable templates -->
+<ng-template #Tab1>
+    <p>Vakal text here dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
+        sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies
+        nec,
+        pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+    <p class="mb-0">Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
+        imperdiet
+        a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras dapibus. Vivamus
+        elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae,
+        eleifend
+        ac, enim.</p>
+</ng-template>
+
+<ng-template #Tab2>
+    <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a,
+        venenatis
+        vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras dapibus. Vivamus elementum
+        semper
+        nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
+    <p class="mb-0">Vakal text here dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+        Aenean
+        massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+</ng-template>
+
+<ng-template #Tab3>
+    <p>Vakal text here dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
+        sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies
+        nec,
+        pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+    <p class="mb-0">Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
+        imperdiet
+        a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras dapibus. Vivamus
+        elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae,
+        eleifend
+        ac, enim.</p>
+</ng-template>

@@ -1,0 +1,78 @@
+<div class="card">
+    <div class="card-body">
+
+        <div class="d-flex pb-2 border-bottom align-items-center">
+            <img [src]="loggedInUser.avatar" class="me-2 rounded-circle" height="48" [alt]="loggedInUser.name" />
+            <div>
+                <h5 class="my-0 fs-14">{{loggedInUser.name}}</h5>
+            </div>
+            <div class="flex-grow-1">
+                <ul class="list-inline text-end mb-0">
+                    <li class="list-inline-item fs-18" ngbDropdown>
+                        <a href="javascript: void(0);" class="dropdown-toggle text-dark" ngbDropdownToggle>
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </a>
+                        <div class="dropdown-menu-end" ngbDropdownMenu>
+                            <a ngbDropdownItem href="javascript: void(0);"><i class="bi bi-people fs-16 me-2"></i>New
+                                Group</a>
+                            <a ngbDropdownItem href="javascript: void(0);"><i
+                                    class="bi bi-person-lines-fill fs-16 me-2"></i>Contacts</a>
+                            <a ngbDropdownItem href="javascript: void(0);"><i
+                                    class="bi bi-bookmark fs-16 me-2"></i>Saved
+                                Message</a>
+                            <a ngbDropdownItem href="javascript: void(0);"><i
+                                    class="bi bi-person-plus fs-16 me-2"></i>Invite Friends</a>
+                            <a ngbDropdownItem href="javascript: void(0);"><i
+                                    class="bi bi-question-circle fs-16 me-2"></i>Help</a>
+                            <a ngbDropdownItem href="javascript: void(0);"><i
+                                    class="bi bi-gear fs-16 me-2"></i>Setting</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- start searchbar -->
+        <div>
+            <form class="chat-search">
+                <div class="chat-search-box">
+                    <div class="input-group">
+                        <button class="btn input-group-text" type="submit">
+                            <i class="uil uil-search"></i>
+                        </button>
+                        <input type="search" class="form-control" placeholder="Search..." id="top-search"
+                            [(ngModel)]="searchUser" name="seachUser" #seachUser="ngModel" (keyup)="search()">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- End searchbar -->
+
+        <!-- start contact list -->
+        <ngx-simplebar class="pe-2" style="max-height: 545px">
+            <a href="javascript:void(0);" class="text-body" *ngFor="let user of userList" (click)="activateUser(user)">
+                <div class="d-flex align-items-start p-2" [ngClass]="{'bg-light': user.id === selectedUser.id}">
+                    <div class="position-relative">
+                        <span class="user-status"
+                            [ngClass]="{'bg-success': user.userStatus==='online','bg-danger': user.userStatus==='busy','bg-warning': user.userStatus==='away'}"></span>
+                        <img [src]="user.avatar" class="me-2 rounded-circle" height="48" [alt]="user.name" />
+                    </div>
+                    <div class="w-100 overflow-hidden">
+                        <h5 class="mt-0 mb-0 fs-14">
+                            <span class="float-end text-muted fs-12">{{user.lastMessageOn}}</span>
+                            {{user.name}}
+                        </h5>
+                        <p class="mt-1 mb-0 text-muted fs-14">
+                            <span class="float-end badge bg-danger text-white"
+                                *ngIf="user.totalUnread!>0">{{user.totalUnread}}</span>
+                            <span class="w-75 text-dark">{{user.lastMessage}}</span>
+                        </p>
+                    </div>
+                </div>
+            </a>
+
+        </ngx-simplebar>
+
+
+    </div> <!-- End card-body -->
+</div> <!-- End card -->

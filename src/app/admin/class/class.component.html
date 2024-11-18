@@ -1,0 +1,52 @@
+<app-page-title [breadcrumbItems]="pageTitle" title="New Class"></app-page-title>
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="Form" #validate1="ngForm">
+            <div class="row align-items-end">
+                <div class="col-md-4">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Class Name</label>
+                        <input type="email" class="form-control" formControlName="ClassName" placeholder="Enter Class Name" required />
+                        <div *ngIf="validate1.submitted && form1.ClassName.invalid" class="invalid-feedback">
+                            Please enter Class Name.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <button *ngIf="!isEditing" type="submit" (click)="Create()" class="btn btn-primary mb-2" style="width: 150px;">Add Class</button>
+                    <button *ngIf="isEditing" type="submit" (click)="Update()" class="btn btn-info mb-2" style="width: 150px;">Update Class</button>&nbsp;
+                    <button *ngIf="isEditing" type="submit" (click)="Cancel()" class="btn btn-danger mb-2" style="width: 150px;">Cancel</button>
+                </div>
+            </div>
+        </form>
+        <div *ngIf="errMsg" class="alert alert-danger alert-dismissible fade show" role="alert" style="width:100%">
+            {{errMsg}}
+        </div>
+        <div *ngIf="successMsg" class="alert alert-success alert-dismissible fade show" role="alert" style="width:100%">
+            {{successMsg}}
+        </div>
+        <div *ngIf="ClassData && ClassData.length > 0; else noData">
+            <table class="table table-bordered table-striped mt-2 mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th [width]="50" class="text-center">Sr.No.</th>
+                        <th>ClassId</th>
+                        <th>ClassName</th>
+                        <th width="110px" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let Item of ClassData; let i = index">
+                        <td class="text-center">{{ i + 1 }}</td>
+                        <td>{{ Item.ClassId }}</td>
+                        <td>{{ Item.ClassName }}</td>
+                        <td class="text-center"><a class="btn btn-link btn-sm p-0" (click)="Edit(Item.ClassId)">Edit</a> | <a class="btn btn-link btn-sm p-0" (click)="Delete(Item.ClassId)">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #noData>
+            <p>No records available.</p>
+        </ng-template>
+    </div>
+</div>

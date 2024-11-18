@@ -1,0 +1,135 @@
+<!-- Left sidebar -->
+<div class="inbox-leftbar {{containerClass}}">
+
+    <ng-content></ng-content>
+
+    <div class="mail-list mt-4">
+        <a href="javascript:void(0)" class="list-group-item border-0" *ngFor="let link of emailMenuLinks"
+            [ngClass]="{'text-danger fw-bold': link.is_open}">
+            <i class=" {{link.icon}} fs-15 me-1"></i>{{link.name}}
+            <span class="badge bg-{{link.variant}} float-end ms-2 mt-1" *ngIf="link.value">{{link.value}}</span>
+        </a>
+    </div>
+    <!-- End list -->
+
+    <h6 class="mt-4">Labels</h6>
+    <div class="list-group border-0 mail-list">
+        <a href="" class="list-group-item border-0" *ngFor="let label of emailLabels">
+            <span class="uil uil-circle text-{{label.variant}} fs-12 me-1"></span>{{label.name}}
+        </a>
+    </div>
+    <ng-container *ngIf="showChat">
+        <div class="mt-4">
+            <div class="d-flex">
+                <div class="me-2 flex-shrink-0">
+                    <img [src]="loggedInUser.avatar" alt="" class="avatar-sm rounded-circle">
+                </div>
+                <div class="flex-grow-1 overflow-hidden">
+                    <h5 class="fs-14 m-0">{{loggedInUser.name}}</h5>
+                    <small class="text-muted">
+                        <i class="uil uil-circle fs-11 text-success"></i> Active Now
+                    </small>
+                </div>
+                <div class="float-end mt-1" ngbDropdown>
+                    <a href="javascript:void(0)" class="arrow-none" ngbDropdownToggle>
+                        <i class="uil uil-ellipsis-v text-muted fs-12"></i>
+                    </a>
+                    <div class="dropdown-menu-end" ngbDropdownMenu>
+                        <a ngbDropdownItem>Edit</a>
+                        <a ngbDropdownItem>Delete</a>
+                    </div>
+                </div> <!-- end dropdown -->
+            </div>
+        </div>
+
+        <hr class="mb-1" />
+
+        <ul class="list-unstyled">
+
+            <li class="py-2">
+                <a href="javascript:void(0)" class="chat"
+                    (click)="showChatWindow('Johnny','assets/images/users/avatar-2.jpg')">
+                    <div class="d-flex">
+                        <div class="me-2 flex-shrink-0">
+                            <img src="assets/images/users/avatar-2.jpg" alt="" class="avatar-sm rounded-circle">
+                        </div>
+                        <div class="flex-grow-1 ps-1 overflow-hidden">
+                            <h5 class="fs-14 m-0">Johnny</h5>
+                            <p class="text-muted fs-13 text-truncate mb-0">Neque porro quisquam est</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="py-2">
+                <a href="javascript:void(0)" class="chat"
+                    (click)="showChatWindow('Bryan','assets/images/users/avatar-3.jpg')">
+                    <div class="d-flex">
+                        <div class="me-2 flex-shrink-0">
+                            <img src="assets/images/users/avatar-3.jpg" alt="" class="avatar-sm rounded-circle">
+                        </div>
+                        <div class="flex-grow-1 ps-1 overflow-hidden">
+                            <h5 class="fs-14 m-0">Bryan</h5>
+                            <p class="text-muted fs-13 text-truncate mb-0">For science, music, sport, etc</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="py-2">
+                <a href="javascript:void(0)" class="chat" (click)="showChatWindow('Tracy')">
+                    <div class="d-flex">
+                        <div class="me-2 flex-shrink-0">
+                            <div class="avatar-sm fw-bold d-inline-block">
+                                <span class="avatar-title rounded-circle bg-soft-danger text-danger">T</span>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ps-1 overflow-hidden">
+                            <h5 class="fs-14 m-0">Tracy</h5>
+                            <p class="text-muted fs-13 text-truncate mb-0">
+                                To an English person, it will seem like simplified
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="py-2">
+                <a href="javascript:void(0)" class="chat"
+                    (click)="showChatWindow('Thomas','assets/images/users/avatar-4.jpg')">
+                    <div class="d-flex">
+                        <div class="me-2 flex-shrink-0">
+                            <img src="assets/images/users/avatar-4.jpg" alt="" class="avatar-sm rounded-circle">
+                        </div>
+                        <div class="flex-grow-1 ps-1 overflow-hidden">
+                            <h5 class="fs-14 m-0">Thomas</h5>
+                            <p class="text-muted fs-13 text-truncate mb-0">
+                                To achieve this, it would be necessary
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="py-2">
+                <a href="javascript:void(0)" class="chat" (click)="showChatWindow('David')">
+                    <div class="d-flex">
+                        <div class="me-2 flex-shrink-0">
+                            <div class="avatar-sm fw-bold d-inline-block">
+                                <span class="avatar-title rounded-circle bg-soft-success text-success">D</span>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ps-1 overflow-hidden">
+                            <h5 class="fs-14 m-0">David</h5>
+                            <p class="text-muted fs-13 text-truncate mb-0">
+                                If several languages coalesce
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+
+        <app-email-chat-box [chatUser]="chatUser" (hideChatWindow)="hideChatWindow()" *ngIf="showChatbox">
+        </app-email-chat-box>
+
+    </ng-container>
+
+</div>
+<!-- End Left sidebar -->

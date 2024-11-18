@@ -1,0 +1,80 @@
+<div class="row">
+    <div class="col-12">
+        <div class="d-block">
+            <div class="float-lg-end">
+                <div class="d-lg-flex align-items-center mb-2 mt-0">
+                    <div class="file-search d-inline-block me-1">
+                        <form>
+                            <div class="input-group align-items-center">
+                                <i class="bi bi-search icon-search bg-light ms-2"></i>
+                                <input type="text" class="form-control search-input bg-light border-0 mt-0"
+                                    placeholder="Search Files..." />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-light" placement="top" ngbTooltip="Toggle View">
+                            <i class="bi bi-list-ul"></i>
+                        </button>
+                        <div ngbDropdown container="body">
+                            <button type="button" class="btn btn-light" id="dropdownBasic1" ngbDropdownToggle>
+                                <span class="text-dark" placement="top" ngbTooltip="View Options">
+                                    <i class="bi bi-caret-down"></i>
+                                </span>
+                            </button>
+                            <div class="dropdown-menu-end" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                <a ngbDropdownItem>A - Z</a>
+                                <a ngbDropdownItem>Z - A</a>
+                                <a ngbDropdownItem>Last Modified</a>
+                                <a ngbDropdownItem>First Modified</a>
+                                <a ngbDropdownItem>Size</a>
+                                <a ngbDropdownItem>Type</a>
+                            </div>
+                        </div>
+                        <div ngbDropdown container="body" autoClose="outside">
+                            <button type="button" class="btn btn-light" id="dropdownBasic2" ngbDropdownToggle>
+                                <span class="text-dark" placement="top" ngbTooltip="View Options">
+                                    <i class="bi bi-list"></i>
+                                </span>
+                            </button>
+                            <div class="dropdown-menu-end" ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                                <a class="dropdown-item text-center border-bottom" href="javascript:void(0);">
+                                    <i class="bi bi-window me-2 fs-15" placement="top" ngbTooltip="New Window"></i>
+                                    <i class="bi bi-folder-plus fs-15" placement="top" ngbTooltip="New Folder"></i>
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);">Edit
+                                    <i class="bi bi-scissors mx-2 fs-15" placement="top" ngbTooltip="Cut"></i>
+                                    <i class="bi bi-clipboard-check me-2 fs-15" placement="top" ngbTooltip="Copy"></i>
+                                    <i class="bi bi-clipboard-data fs-15" placement="top" ngbTooltip="Paste"></i>
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);">Select All</a>
+                                <a class="dropdown-item d-flex" href="javascript:void(0);">
+                                    <div class="form-check">
+                                        <input class="form-check-input me-2" type="checkbox" value="" id="hiddenFiles">
+                                    </div>
+                                    Show Hidden Files
+                                </a>
+                                <a class="dropdown-item d-flex" href="javascript:void(0);">
+                                    <div class="form-check">
+                                        <input class="form-check-input me-2" type="checkbox" value="" id="fsidebar">
+                                    </div>
+                                    Show Sidebar
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);">Help</a>
+                                <a class="dropdown-item" href="javascript:void(0);">About Files</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group mb-2">
+                <button type="button" class="btn btn-light"><i class="bi bi-arrow-left"></i></button>
+                <button type="button" class="btn btn-light"><i class="bi bi-arrow-right"></i></button>
+            </div>
+            <div class="btn-group mb-2 ms-1">
+                <button type="button" class="btn btn-light"><i class="bi bi-house me-2"></i>Home</button>
+            </div>
+        </div>
+    </div>
+
+</div>

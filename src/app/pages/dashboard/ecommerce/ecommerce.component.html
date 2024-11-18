@@ -1,0 +1,291 @@
+<!-- start page title -->
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+            <h4 class="page-title">Dashboard</h4>
+            <div class="page-title-right">
+                <form class="float-md-end mt-3 mt-md-0">
+                    <div class="row g-2">
+                        <div class="col-sm-auto">
+                            <!-- <div class="mb-1 mb-sm-0"> -->
+                                <ng-template #t let-date let-focused="focused">
+                                    <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
+                                        [class.faded]="isHovered(date) || isInside(date)"
+                                        (mouseenter)="hoveredDate = date" (mouseleave)="hoveredDate = null">
+                                        {{ date.day }}
+                                    </span>
+                                </ng-template>
+
+
+                                <input type="text" class="form-control date" id="dash-daterange"
+                                    style="min-width: 210px;" [value]="selectedDateRange" ngbDatepicker
+                                    #datepicker8="ngbDatepicker" (dateSelect)="onDateSelection($event)"
+                                    [dayTemplate]="t" (click)="datepicker8.toggle()" autoClose="'outside'">
+
+                                <!-- <input type="text" class="form-control" id="dash-daterange" style="min-width: 210px;" /> -->
+                            <!-- </div> -->
+                        </div>
+                        <div class="col-sm-auto">
+                            <div class="btn-group" ngbDropdown>
+                                <button type="button" class="btn btn-primary" ngbDropdownToggle>
+                                    <i class='uil uil-file-alt me-1'></i>Download
+                                    <i class="icon"><span data-feather="chevron-down"
+                                            appFeatherIcon></span></i></button>
+                                <div ngbDropdownMenu class="dropdown-menu-end">
+                                    <a ngbDropdownItem class="notify-item">
+                                        <i data-feather="mail" class="icon-dual icon-xs me-2" appFeatherIcon></i>
+                                        <span>Email</span>
+                                    </a>
+                                    <a ngbDropdownItem class="notify-item">
+                                        <i data-feather="printer" class="icon-dual icon-xs me-2" appFeatherIcon></i>
+                                        <span>Print</span>
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a ngbDropdownItem class="notify-item">
+                                        <i data-feather="file" class="icon-dual icon-xs me-2" appFeatherIcon></i>
+                                        <span>Re-Generate</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end page title -->
+
+<div class="row">
+    <div class="col-sm-6 col-xl-3" *ngFor="let item of chartStatisticsData">
+        <app-chart-statistics-widget [mainTitle]="item.mainTitle" [value]="item.value" [subValue]="item.subValue"
+            [chartType]="item.chartType" [chartData]="item.chartData" [chartColors]="item.chartColors">
+        </app-chart-statistics-widget>
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-xl-3">
+        <div class="card">
+            <div class="card-body p-0">
+                <div class="p-3">
+                    <div class="float-end" ngbDropdown placement="bottom-end">
+                        <a ngbDropdownToggle class="arrow-none text-muted" id="ecommerceDropdown"
+                            href="javascript:void(0)" aria-expanded="false">
+                            <i class="uil uil-ellipsis-v"></i>
+                        </a>
+                        <div ngbDropdownMenu class="dropdown-menu-end" aria-labelledby="ecommerceDropdown">
+                            <!-- item-->
+                            <a ngbDropdownItem>
+                                <i class="uil uil-refresh me-2"></i>Refresh
+                            </a>
+                            <!-- item-->
+                            <a ngbDropdownItem>
+                                <i class="uil uil-user-plus me-2"></i>Add New
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <!-- item-->
+                            <a ngbDropdownItem>
+                                <i class="uil uil-exit me-2"></i>Exit
+                            </a>
+                        </div>
+                    </div>
+
+                    <h5 class="card-title header-title mb-0">Overview</h5>
+                </div>
+
+                <app-widget-overview *ngFor="let item of overviewData" [title]="item.title" [stats]="item.stats"
+                    [icon]="item.icon" iconClass="icon-md"></app-widget-overview>
+
+                <a href="javascript:void(0)" class="p-2 d-block text-end">View All <i class="uil-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="float-end" ngbDropdown placement="bottom-end">
+                    <a ngbDropdownToggle class="arrow-none text-muted" href="javascript:void(0)" aria-expanded="false">
+                        <i class="uil uil-ellipsis-v"></i>
+                    </a>
+                    <div ngbDropdownMenu class="dropdown-menu-end">
+                        <!-- item-->
+                        <a href="javascript:void(0);" ngbDropdownItem>
+                            Today
+                        </a>
+                        <!-- item-->
+                        <a href="javascript:void(0);" ngbDropdownItem>
+                            7 Days
+                        </a>
+                        <!-- item-->
+                        <a href="javascript:void(0);" ngbDropdownItem>
+                            15 Days
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <!-- item-->
+                        <a href="javascript:void(0);" ngbDropdownItem>
+                            1 Months
+                        </a>
+                        <!-- item-->
+                        <a href="javascript:void(0);" ngbDropdownItem>
+                            6 Months
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <!-- item-->
+                        <a href="javascript:void(0);" ngbDropdownItem>
+                            1 Year
+                        </a>
+                    </div>
+                </div>
+                <h5 class="card-title mb-0 header-title">Revenue</h5>
+
+                <div id="revenue-chart" dir="ltr">
+                    <apx-chart class="apex-charts mt-3" [chart]="revenueChart.chart!"
+                        [dataLabels]="revenueChart.dataLabels!" [stroke]="revenueChart.stroke!"
+                        [series]="revenueChart.series!" [legend]="revenueChart.legend!" [colors]="revenueChart.colors!"
+                        [xaxis]="revenueChart.xaxis!" [tooltip]="revenueChart.tooltip!" [yaxis]="revenueChart.yaxis!"
+                        [fill]="revenueChart.fill!" *ngIf="revenueChart">
+                    </apx-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3">
+        <div class="card">
+            <div class="card-body pb-0">
+                <div class="float-end" ngbDropdown placement="bottom-end">
+                    <a ngbDropdownToggle class="arrow-none text-muted" id="ecommerceDropdown" href="javascript:void(0)"
+                        aria-expanded="false">
+                        <i class="uil uil-ellipsis-v"></i>
+                    </a>
+                    <div ngbDropdownMenu class="dropdown-menu-end" aria-labelledby="ecommerceDropdown">
+                        <!-- item-->
+                        <a ngbDropdownItem>
+                            <i class="uil uil-refresh me-2"></i>Refresh
+                        </a>
+                        <!-- item-->
+                        <a ngbDropdownItem>
+                            <i class="uil uil-user-plus me-2"></i>Add New
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <!-- item-->
+                        <a ngbDropdownItem>
+                            <i class="uil uil-exit me-2"></i>Exit
+                        </a>
+                    </div>
+                </div>
+
+                <h5 class="card-title header-title">Targets</h5>
+                <div id="targets-chart" dir="ltr">
+                    <apx-chart class="apex-charts mt-3" [chart]="targetChart.chart!"
+                        [dataLabels]="targetChart.dataLabels!" [stroke]="targetChart.stroke!"
+                        [series]="targetChart.series!" [legend]="targetChart.legend!" [grid]="targetChart.grid!"
+                        [xaxis]="targetChart.xaxis!" [plotOptions]="targetChart.plotOptions!"
+                        [tooltip]="targetChart.tooltip!" *ngIf="targetChart">
+                    </apx-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- row -->
+
+<div class="row">
+    <div class="col-xl-5">
+        <div class="card">
+            <div class="card-body">
+                <div class="float-end" ngbDropdown placement="bottom-end">
+                    <a ngbDropdownToggle class="arrow-none text-muted" id="ecommerceDropdown" href="javascript:void(0)"
+                        aria-expanded="false">
+                        <i class="uil uil-ellipsis-v"></i>
+                    </a>
+                    <div ngbDropdownMenu class="dropdown-menu-end" aria-labelledby="ecommerceDropdown">
+                        <!-- item-->
+                        <a ngbDropdownItem>
+                            <i class="uil uil-refresh me-2"></i>Refresh
+                        </a>
+                        <!-- item-->
+                        <a ngbDropdownItem>
+                            <i class="uil uil-user-plus me-2"></i>Add New
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <!-- item-->
+                        <a ngbDropdownItem>
+                            <i class="uil uil-exit me-2"></i>Exit
+                        </a>
+                    </div>
+                </div>
+
+                <h5 class="card-title mt-0 mb-0 header-title">Sales By Category</h5>
+                <div id="sales-by-category-chart" dir="ltr" class="mb-0 mt-4">
+                    <apx-chart class="apex-charts" [plotOptions]="categoryChart.plotOptions!"
+                        [chart]="categoryChart.chart!" [legend]="categoryChart.legend!" [series]="categoryChart.series!"
+                        [labels]="categoryChart.labels!" [responsive]="categoryChart.responsive!"
+                        [tooltip]="categoryChart.tooltip!">
+                    </apx-chart>
+                </div>
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+    <div class="col-xl-7">
+        <div class="card">
+            <div class="card-body">
+                <a [routerLink]="['.']" class="btn btn-primary btn-sm float-end">
+                    <i class='uil uil-export me-1'></i> Export
+                </a>
+                <h5 class="card-title mt-0 mb-0 header-title">Recent Orders</h5>
+
+                <div class="table-responsive mt-4">
+                    <table class="table table-hover table-nowrap mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Product</th>
+                                <th scope="col">Customer</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let order of recentOrderData">
+                                <td>{{order.order_id}}</td>
+                                <td>{{order.productName}}</td>
+                                <td>{{order.customer}}</td>
+                                <td>{{order.price | currency}}</td>
+                                <td>
+                                    <ng-container [ngSwitch]="order.status">
+                                        <span class="badge badge-soft-warning py-1"
+                                            *ngSwitchCase="'Pending'">Pending</span>
+                                        <span class="badge badge-soft-danger py-1"
+                                            *ngSwitchCase="'Declined'">Declined</span>
+                                        <span class="badge badge-soft-success py-1" *ngSwitchDefault>Delivered</span>
+                                    </ng-container>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> <!-- end table-responsive-->
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+</div>
+<!-- end row -->
+
+<!-- widgets -->
+<div class="row">
+    <div class="col-xl-4">
+        <app-widget-members cardTitle="Top Performers" [memberList]="memberList"></app-widget-members>
+    </div>
+
+    <div class="col-xl-4">
+        <app-widget-task-list cardTitle="Tasks" [taskList]="taskList"></app-widget-task-list>
+    </div>
+
+    <div class="col-xl-4">
+        <app-widget-chat cardTitle="Recent Conversation" [chatMessages]="chatMessages"></app-widget-chat>
+    </div>
+</div>
+<!-- end row -->

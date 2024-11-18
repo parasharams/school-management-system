@@ -1,0 +1,21 @@
+// body{background-image:url('bg.jpg');background-size:cover;}
+         .container { padding-right: 15%; padding-left: 15%; margin-right: auto; margin-left: auto; }
+         @media(max-width:700px) {
+         .container {
+         padding-right: 5%;
+         padding-left: 5%;
+         }
+         }
+         .border{border:solid 1px black !important;}
+         .imglogo{display:block;margin:auto}
+         @media(max-width:700px) {
+         .imglogo {
+         width: 80%;
+         }
+         }
+         .bold{font-weight:bolder;}
+         .border-top{border-top:solid 1px black !important;}
+         .border-left{border-left:solid 1px black !important;}
+         .border-right { border-right: solid 1px black !important; }
+         .padl{padding-left:5px;}
+         .padr { padding-right: 5px; }

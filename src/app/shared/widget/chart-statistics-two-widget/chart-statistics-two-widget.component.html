@@ -1,0 +1,15 @@
+<div class="row justify-content-between align-items-end" [class]="containerClass">
+    <div class="col-6 col-md-5">
+        <h6 class="text-muted mt-0 fs-14">{{title}}</h6>
+        <h3 class="my-2">{{userCount}}</h3>
+        <h6 class="text-{{variant}} mb-0">{{subValue}}</h6>
+    </div>
+    <div class="col-5 col-md-3">
+        <div>
+            <apx-chart class="apex-charts" [series]="chartOptions.series!" [chart]="chartOptions.chart!"
+                [stroke]="chartOptions.stroke!" [plotOptions]="chartOptions.plotOptions!" [xaxis]="chartOptions.xaxis!"
+                [colors]="chartOptions.colors!" [tooltip]="chartOptions.tooltip!" *ngIf="chartOptions">
+            </apx-chart>
+        </div>
+    </div>
+</div>

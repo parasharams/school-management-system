@@ -1,0 +1,120 @@
+
+<app-page-title [breadcrumbItems]="pageTitle" title="Student List"></app-page-title>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-end mb-2">
+                    <button class="btn btn-info" (click)="open(StudForm)">+ Add Student</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">Student ID</th>
+                                <th scope="col">Student Name</th>
+                                <th scope="col">DOB</th>
+                                <th scope="col">Gender</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let student of studentdata">
+                                <td>{{student.studentId}}</td>
+                                <td>{{student.fname}} {{student.mname}} {{student.lname}}</td>
+                                <td>{{student.dob}}</td>
+                                <td>{{student.gender}}</td>
+                                <td>
+                                    <button class="btn btn-info btn-sm" style="padding: 2px 7px;" (click)="getStudDetails(StudForm, student.studentId)"><i class="bi bi-pencil-square" style="font-size: 14px;"></i></button>&nbsp;
+                                    <button class="btn btn-danger btn-sm" style="padding: 2px 7px;" (click)="deleteStudentData(student.studentId)"><i class="bi bi-trash" style="font-size: 14px;"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #StudForm let-modal>
+    <div class="modal-header">
+        <h4 *ngIf="!isEditing" class="modal-title" id="modalLabel">Student Registration Form</h4>
+        <h4 *ngIf="isEditing" class="modal-title" id="modalLabel">Edit Student</h4>
+        <button type="button" class="btn-close" id="cancel" (click)="modal.dismiss('Cross click')"
+            style="margin-left: 0;">
+        </button>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="errMsg" class="alert alert-danger alert-dismissible fade show" role="alert" style="width:100%">
+            <strong>{{errMsg}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div *ngIf="successMsg" class="alert alert-success alert-dismissible fade show" role="alert" style="width:100%">
+            <strong>{{successMsg}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="studentForm">
+            <div class="form-group mb-2" *ngIf="isEditing">
+                <label class="form-label">Student ID</label>
+                <input class="form-control" formControlName="studentId" readonly>
+            </div>
+            <div class="form-group mb-2">
+                <label class="form-label">Year</label>
+                <select2 [data]="years" formControlName="yearId" placeholder="Select Year" id="selec2-2">
+                </select2>
+            </div>
+            <div class="form-group mb-2">
+                <label class="form-label">Class</label>
+                <select2 [data]="classes" formControlName="classId" placeholder="Select Class" id="selec2-2">
+                </select2>
+            </div>
+            <div class="form-group mb-2">
+                <label class="form-label">Admission Date</label>
+                <input type="date" class="form-control" formControlName="admissionDate" placeholder="Enter First Name" />
+            </div>
+            <div class="form-group mb-2">
+                <label class="form-label">First name</label>
+                <input type="text" class="form-control" formControlName="fname" placeholder="Enter First Name" />
+            </div>
+            <div class="form-group mb-2">
+                <label class="form-label">Middle name</label>
+                <input type="text" class="form-control" formControlName="mname" placeholder="Enter Middle Name" />
+            </div>
+            <div class="form-group mb-2">
+                <label class="form-label">Last name</label>
+                <input type="text" class="form-control" formControlName="lname" placeholder="Enter Last Name" />
+            </div>
+            <div class="form-group mb-2">
+                <label class="form-label">Gender</label>
+                <select class="form-select" formControlName="gender">
+                    <option value="Male" selected>Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group mb-2">
+                <label class="form-label">Dath of Birth</label>
+                <input type="date" class="form-control"
+                    formControlName="dob" placeholder="Date of Birth" />
+            </div>
+            <div class="form-group mb-2">
+                <label class="form-label">Contact Number</label>
+                <input type="text" class="form-control" formControlName="contact" placeholder="Enter Contact Number" />
+            </div>
+            <div class="form-group mb-2">
+                <label class="form-label">Mother name</label>
+                <input type="text" class="form-control" formControlName="mothername" placeholder="Enter Mother Name" />
+            </div>
+            <div class="form-group mb-2">
+                <label class="form-label">Address</label>
+                <textarea type="text" class="form-control" formControlName="address" placeholder="Address" rows="4" ></textarea>
+            </div>
+            <div class="form-group text-center" *ngIf="!isEditing">
+                <button class="btn btn-primary" type="submit" (click)="addStudent()">Add Student</button>
+            </div>
+            <div class="form-group text-center" *ngIf="isEditing">
+                <button class="btn btn-success" type="submit" (click)="updateStudent()">Update Student</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

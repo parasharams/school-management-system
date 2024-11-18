@@ -1,0 +1,18 @@
+
+  .bound-box{
+    border: 1px solid;
+    padding: 10px;
+    border-color: red;
+    height: 400px;
+    width: 100%;
+    max-height: 400px;
+    max-width: 100%;
+  }
+  
+  .resizable-widget{
+    background-color: blue;
+    opacity: 0.5;
+    border: none;
+    width: 250px;
+    height: 200px;
+  }

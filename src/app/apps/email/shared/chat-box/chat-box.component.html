@@ -1,0 +1,83 @@
+<div class="chatbox overflow-hidden">
+    <div class="bg-primary p-2">
+        <div class="d-flex">
+            <img [src]="chatUser?.avatar" alt="" class="avatar-sm rounded ms-1 me-2" *ngIf="chatUser?.avatar">
+            <div class="avatar-sm  ms-1 me-2 fw-bold d-inline-block" *ngIf="!chatUser?.avatar">
+                <span class="avatar-title rounded bg-soft-danger text-danger">{{chatUser?.name![0]}}</span>
+            </div>
+            <div class="flex-grow-1">
+                <h5 class="fs-13 text-white m-0">{{chatUser?.name}}</h5>
+                <small class="text-white-50">
+                    <i class="uil uil-circle fs-11 text-success me-1"></i>Active Now
+                </small>
+            </div>
+            <div class="float-end fs-18 mt-1">
+                <a href="javascript:void(0)" class="text-white me-2">
+                    <i class="uil uil-comment-alt-notes fs-16"></i>
+                </a>
+                <a href="javascript:void(0)" class="chat-close text-white" (click)="hide()">
+                    <i class="uil uil-multiply fs-14"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-conversation p-2">
+        <ngx-simplebar style="max-height: 220px; margin-bottom: 10px">
+            <ul class="conversation-list">
+                <li class="text-center">
+                    <span class="badge text-secondary">Today</span>
+                </li>
+                <li class="clearfix even">
+                    <div class="chat-avatar">
+                        <img src="assets/images/users/avatar-2.jpg" alt="male">
+                        <small>10:00</small>
+                    </div>
+                    <div class="conversation-text">
+                        <div class="ctext-wrap">
+                            <div class="fw-medium">Johnny</div>
+                            <p>Hello!</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix odd">
+                    <div class="conversation-text">
+                        <div class="ctext-wrap">
+                            <div class="fw-medium">Nik P</div>
+                            <p>Hi, How are you? What about our next meeting?</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <div class="chat-avatar">
+                        <img src="assets/images/users/avatar-6.jpg" alt="male">
+                        <small>10:01</small>
+                    </div>
+                    <div class="conversation-text">
+                        <div class="ctext-wrap">
+                            <div class="fw-medium">Johnny</div>
+                            <p>Yeah everything is fine</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="clearfix odd">
+                    <div class="conversation-text">
+                        <div class="ctext-wrap">
+                            <div class="fw-medium">Nik P</div>
+                            <p>Wow that's great...</p>
+                        </div>
+                    </div>
+                </li>
+
+            </ul>
+        </ngx-simplebar>
+        <div class="position-relative chat-input">
+            <input type="text" class="form-control" placeholder="Type your message...">
+            <div class="chat-link">
+                <a href="javascript:void(0)" class="p-1"><i class="uil-image"></i></a>
+                <a href="javascript:void(0)" class="p-1"><i class="uil-navigator"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end chatbox -->

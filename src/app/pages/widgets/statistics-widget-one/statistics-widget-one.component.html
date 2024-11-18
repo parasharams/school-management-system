@@ -1,0 +1,14 @@
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex">
+            <div class="flex-grow-1">
+                <span class="text-muted text-uppercase fs-12 fw-bold">{{title}}</span>
+                <h3 class="mb-0" *ngIf="!isNaN(stats)">{{stats | number}}</h3>
+                <h3 class="mb-0" *ngIf="isNaN(stats)">{{stats}}</h3>
+            </div>
+            <div class="align-self-center flex-shrink-0">
+                <span class="icon-lg icon-dual-{{variant}}" [attr.data-feather]="icon" appFeatherIcon></span>
+            </div>
+        </div>
+    </div>
+</div>

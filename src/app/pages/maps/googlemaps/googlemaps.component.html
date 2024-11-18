@@ -1,0 +1,100 @@
+<!-- page title -->
+<app-page-title [breadcrumbItems]="pageTitle" title="Google Maps"></app-page-title>
+
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+
+
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mb-3">Basic Google Map</h4>
+                <agm-map [latitude]="gmapConfig1.lat" [longitude]="gmapConfig1.lng" class="gmaps"
+                    [disableDefaultUI]="false" (mapReady)="mapReady($event)">
+                </agm-map>
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mb-3">Markers Google Map</h4>
+                <agm-map [latitude]="gmapConfig2.lat" [longitude]="gmapConfig2.lng" class="gmaps"
+                    (mapReady)="mapReady($event)">
+                    <agm-marker [latitude]="marker.lat" [longitude]="marker.lng"
+                        *ngFor="let marker of gmapConfig2.markers">
+                        <agm-info-window>{{ marker.title }}</agm-info-window>
+                    </agm-marker>
+                </agm-map>
+            </div> <!-- end card-body-->
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+</div>
+<!-- end row-->
+
+
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mb-3">Ultra Light with Labels</h4>
+                <agm-map [latitude]="gmapConfig3.lat" [longitude]="gmapConfig3.lng" [styles]="gmapConfig3.styles!"
+                    class="gmaps" (mapReady)="mapReady($event)">
+                </agm-map>
+            </div>
+            <!-- end card-body-->
+        </div>
+        <!-- end card-->
+    </div>
+    <!-- end col-->
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mb-3">Dark</h4>
+                <agm-map [latitude]="gmapConfig4.lat" [longitude]="gmapConfig4.lng" [styles]="gmapConfig4.styles!"
+                    class="gmaps" (mapReady)="mapReady($event)">
+                </agm-map>
+            </div>
+            <!-- end card-body-->
+        </div>
+        <!-- end card-->
+    </div>
+    <!-- end col-->
+</div>
+<!-- end row-->
+
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card-box">
+            <h4 class="header-title mb-3">Polygons</h4>
+
+            <div id="gmaps-polygons">
+                <agm-map [latitude]="gmapConfig5.lat" [longitude]="gmapConfig5.lng" class="gmaps"
+                    [zoom]="gmapConfig5.zoom!" (mapReady)="mapReady($event)">
+                    <agm-polygon [visible]="true" [strokeColor]="'#BBD8E9'" [strokeWeight]="3" [fillColor]="'#BBD8E9'"
+                        [strokeOpacity]="1" [fillOpacity]="0.6" [paths]="gmapConfig5.paths!">
+                    </agm-polygon>
+                </agm-map>
+            </div>
+        </div> <!-- end card-box-->
+    </div> <!-- end col-->
+
+    <div class="col-lg-6">
+        <div class="card-box">
+            <h4 class="header-title mb-3">Polyline</h4>
+
+            <div id="gmaps-polygons">
+                <agm-map [latitude]="gmapConfig6.lat" [longitude]="gmapConfig6.lng" class="gmaps"
+                    [zoom]="gmapConfig6.zoom!" (mapReady)="mapReady($event)">
+                    <agm-polyline>
+                        <agm-polyline-point [latitude]="point.lat" [longitude]="point.lng"
+                            *ngFor="let point of gmapConfig6.ponits">
+                        </agm-polyline-point>
+                    </agm-polyline>
+                </agm-map>
+            </div>
+        </div> <!-- end card-box-->
+    </div> <!-- end col-->
+</div> <!-- end row-->

@@ -1,0 +1,144 @@
+<app-page-title [breadcrumbItems]="pageTitle" title="Add Marks"></app-page-title>
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="Form" #validate1="ngForm">
+            <div class="row align-items-end">
+                <div class="col-md-4">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Class</label>
+                        <select class="form-select" formControlName="ClassId" (change)="onChangeClass()" placeholder="Select Class" required >
+                            <option value="" selected>Select Class</option>
+                            <option *ngFor="let Item of ClassData; let i = index" value="{{ Item.ClassId }}">{{ Item.ClassName }}</option>
+                        </select>
+                        <div *ngIf="validate1.submitted && form1.ClassId.invalid" class="invalid-feedback">
+                            Please Select Class Name.
+                        </div> 
+                    </div>
+                </div>
+                <!-- <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Subject</label>
+                        <select class="form-select" formControlName="SubjectId" (change)="onChangeSubject()" required >
+                            <option value="" selected>Select Subject</option>
+                            <option *ngFor="let Item of SubjectListData; let i = index" value="{{ Item.SubjectId }}">{{ Item.SubjectName }}</option>
+                        </select>
+                        <div *ngIf="validate1.submitted && form1.SubjectId.invalid" class="invalid-feedback">
+                            Please Select Subject.
+                        </div> 
+                    </div>
+                </div> -->
+                <div class="col-md-4">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Student</label>
+                        <select class="form-select" formControlName="RollNo" (change)="onChangeRollno()" required >
+                            <option value="" selected>Select Student</option>
+                            <option *ngFor="let Item of StudfilteredData; let i = index" value="{{ Item.RollNo }}">{{ Item.RollNo }}</option>
+                        </select>
+                        <div *ngIf="validate1.submitted && form1.RollNo.invalid" class="invalid-feedback">
+                            Please Select Student.
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Exam</label>
+                        <select class="form-select" formControlName="ExId" (change)="onChangeExam()" required >
+                            <option value="" selected>Select Exam</option>
+                            <option *ngFor="let Item of ExamListData; let i = index" value="{{ Item.ExId }}">{{ Item.ExamName }}</option>
+                        </select>
+                        <div *ngIf="validate1.submitted && form1.ExId.invalid" class="invalid-feedback">
+                            Please Select Exam.
+                        </div> 
+                    </div>
+                </div>
+            </div>
+                <!-- <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Total Marks (Student Marks)</label>
+                        <input type="text" class="form-control" formControlName="TotalMarks" placeholder="Enter Total Marks" required />
+                        <div *ngIf="validate1.submitted && form1.TotalMarks.invalid" class="invalid-feedback">
+                            Please enter Subject Marks.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Out Of Marks</label>
+                        <input type="text" class="form-control" formControlName="OutofMarks" placeholder="Enter Out Of Marks" required readonly />
+                        <div *ngIf="validate1.submitted && form1.OutofMarks.invalid" class="invalid-feedback">
+                            Please enter Subject Out of Marks.
+                        </div>
+                    </div>
+                </div> -->
+            <div class="rows" *ngIf="Subjects && Subjects.length > 0;">
+                <div class="col-md-6">
+                    <table class="table table-bordered table-striped mt-2 mb-0">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Sr.No.</th>
+                                <th>Subject</th>
+                                <th [width]="120">Total Marks</th>
+                                <th class="text-center">Out Of Marks</th>
+                            </tr>
+                        </thead>
+                        <tbody formArrayName="Subjects">
+                            <tr *ngFor="let subject of Subjects.controls; let i = index" [formGroupName]="i">
+                              <td>{{ i + 1 }}</td>
+                              <td>{{ subjectMap[SubjectListData[i].SubjectId] || 'N/A' }}</td>
+                              <td>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  formControlName="TotalMarks"
+                                  placeholder="Marks"
+                                />
+                              </td>
+                              <td class="text-center">
+                                {{ SubjectListData[i]?.OutOfMarks }}
+                              </td>
+                            </tr>
+                          </tbody>                          
+                    </table>
+                </div>
+                <div class="col-md-6 mt-2">
+                    <button *ngIf="!isEditing" type="submit" (click)="Create()" class="btn btn-primary mb-2" style="width: 200px;">Add Marks</button>
+                    <button *ngIf="isEditing" type="submit" (click)="Update()" class="btn btn-info mb-2" style="width: 200px;">Update Marks</button>&nbsp;
+                    <button *ngIf="isEditing" type="submit" (click)="Cancel()" class="btn btn-danger mb-2" style="width: 150px;">Cancel</button>
+                </div>
+            </div>
+        </form>
+        <div *ngIf="errMsg" class="alert alert-danger alert-dismissible fade show" role="alert" style="width:100%">
+            {{errMsg}}
+        </div>
+        <div *ngIf="successMsg" class="alert alert-success alert-dismissible fade show" role="alert" style="width:100%">
+            {{successMsg}}
+        </div>
+        <div *ngIf="ExamData && ExamData.length > 0; else noData">
+            <table class="table table-bordered table-striped mt-2 mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Sr.No.</th>
+                        <th>Class</th>
+                        <th>Exam</th>
+                        <th>Roll No.</th>
+                        <th>Student Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let Item of ExamData; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ classMap[Item.ClassId] || 'N/A' }}</td>
+                        <td>{{ examMap[Item.ExId] || 'N/A' }}</td>
+                        <td>{{ Item.RollNo }}</td>
+                        <td>{{ studentMap[Item.StudentId] || 'N/A' }}</td>
+                        <td><a class="btn btn-link btn-sm p-0" (click)="Edit(Item.ExamId)">Edit</a> | <a class="btn btn-link btn-sm p-0" (click)="Delete(Item.ExamId)">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #noData>
+            <p class="text-center">No records available.</p>
+        </ng-template>
+    </div>
+</div>

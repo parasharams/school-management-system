@@ -1,0 +1,120 @@
+<app-page-title [breadcrumbItems]="pageTitle" title="Add Student"></app-page-title>
+<div class="card">
+    <div class="card-body">
+        <form [formGroup]="Form" #validate1="ngForm">
+            <div class="row align-items-end">
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" formControlName="StudentName" placeholder="Enter Name" required />
+                        <div *ngIf="validate1.submitted && form1.StudentName.invalid" class="invalid-feedback">
+                            Please <Em></Em>nter Name.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Date of Birth</label>
+                        <input type="date" class="form-control" formControlName="DateOfBirth" required />
+                        <div *ngIf="validate1.submitted && form1.DateOfBirth.invalid" class="invalid-feedback">
+                            Please Select DOB.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Gender</label>
+                        <select class="form-select" formControlName="Gender" required >
+                            <option value="" selected>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <div *ngIf="validate1.submitted && form1.Gender.invalid" class="invalid-feedback">
+                            Please Select Gender.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Contact Number</label>
+                        <input type="text" class="form-control" formControlName="Mobile" placeholder="10 Digit Mobile Number" required />
+                        <div *ngIf="validate1.submitted && form1.Mobile.invalid" class="invalid-feedback">
+                            Please enter Contact Number.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Roll Number</label>
+                        <input type="text" class="form-control" formControlName="RollNo" placeholder="Enter Roll Number" required />
+                        <div *ngIf="validate1.submitted && form1.RollNo.invalid" class="invalid-feedback">
+                            Please enter Roll Number.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mb-2">
+                        <label class="form-label">Class</label>
+                        <select class="form-select" formControlName="ClassId" placeholder="Select Class" required >
+                            <option value="" selected>Select Class</option>
+                            <option *ngFor="let Item of ClassData; let i = index" value="{{ Item.ClassId }}">{{ Item.ClassName }}</option>
+                        </select>
+                        <div *ngIf="validate1.submitted && form1.ClassId.invalid" class="invalid-feedback">
+                            Please Select Class Name.
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group mb-3">
+                        <label class="form-label">Address</label>
+                        <textarea type="text" class="form-control" formControlName="Address" rows="3" placeholder="Enter Address" required ></textarea>
+                        <div *ngIf="validate1.submitted && form1.Address.invalid" class="invalid-feedback">
+                            Please enter Address.
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button *ngIf="!isEditing" type="submit" (click)="Create()" class="btn btn-primary mb-2" style="width: 200px;">Add Student</button>
+                    <button *ngIf="isEditing" type="submit" (click)="Update()" class="btn btn-info mb-2" style="width: 200px;">Update Student</button>&nbsp;
+                    <button *ngIf="isEditing" type="submit" (click)="Cancel()" class="btn btn-danger mb-2" style="width: 150px;">Cancel</button>
+                </div>
+            </div>
+        </form>
+        <div *ngIf="errMsg" class="alert alert-danger alert-dismissible fade show" role="alert" style="width:100%">
+            {{errMsg}}
+        </div>
+        <div *ngIf="successMsg" class="alert alert-success alert-dismissible fade show" role="alert" style="width:100%">
+            {{successMsg}}
+        </div>
+        <div *ngIf="StudentData && StudentData.length > 0; else noData">
+            <table class="table table-bordered table-striped mt-2 mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th [width]="60" class="text-center">Sr.No.</th>
+                        <th>Name</th>
+                        <th>Mobile Nummber</th>
+                        <th>Roll Number</th>
+                        <th [width]="100">Class</th>
+                        <th>Address</th>
+                        <th [width]="110" class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let Item of StudentData; let i = index">
+                        <td class="text-center">{{ i + 1 }}</td>
+                        <td>{{ Item.StudentName }}</td>
+                        <td>{{ Item.Mobile }}</td>
+                        <td>{{ Item.RollNo }}</td>
+                        <td>{{ classMap[Item.ClassId] || 'N/A' }}</td>
+                        <td>{{ Item.Address }}</td>
+                        <td class="text-center"><a class="btn btn-link btn-sm p-0" (click)="Edit(Item.StudentId)">Edit</a> | <a class="btn btn-link btn-sm p-0" (click)="Delete(Item.StudentId)">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #noData>
+            <p class="text-center">No records available.</p>
+        </ng-template>
+    </div>
+</div>

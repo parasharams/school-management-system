@@ -1,0 +1,11 @@
+<!-- page title -->
+<app-page-title [breadcrumbItems]="pageTitle" title="Chat"></app-page-title>
+
+<div class="row">
+    <div class="col-xxl-3 col-lg-5">
+        <app-chat-users [selectedUser]="selectedUser" (selectUser)="onSelectedUser($event)"></app-chat-users>
+    </div> <!-- End col -->
+    <div class="col-xxl-9 col-lg-7">
+        <app-chat-area [selectedUser]="selectedUser"></app-chat-area>
+    </div> <!-- End col -->
+</div> <!-- End row -->

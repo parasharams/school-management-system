@@ -1,0 +1,65 @@
+<app-page-title [breadcrumbItems]="pageTitle" title="Year Information"></app-page-title>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-end mb-2">
+                    <button class="btn btn-primary btn-sm" (click)="open(StudForm)">+ Add</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">Year ID</th>
+                                <th scope="col">Year Name</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let year of yeardata">
+                                <td>{{year.yearId}}</td>
+                                <td>{{year.year}}</td>
+                                <td>
+                                    <button class="btn btn-info btn-sm" style="padding: 2px 7px;" (click)="editYear(year.yearId)"><i class="bi bi-pencil-square" style="font-size: 14px;"></i></button>&nbsp;
+                                    <button class="btn btn-danger btn-sm" style="padding: 2px 7px;" (click)="deleteYear(year.yearId)"><i class="bi bi-trash" style="font-size: 14px;"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #StudForm let-modal>
+    <div class="modal-header">
+        <h4 *ngIf="!isEditing" class="modal-title" id="modalLabel">Add Year</h4>
+        <h4 *ngIf="isEditing" class="modal-title" id="modalLabel">Edit Year</h4>
+        <button type="button" class="btn-close" id="cancel" (click)="modal.dismiss('Cross click')"
+            style="margin-left: 0;">
+        </button>
+    </div>
+    <div class="modal-body">
+        <div *ngIf="errMsg" class="alert alert-danger alert-dismissible fade show" role="alert" style="width:100%">
+            <strong>{{errMsg}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div *ngIf="successMsg" class="alert alert-success alert-dismissible fade show" role="alert" style="width:100%">
+            <strong>{{successMsg}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="yearForm">
+            <div class="form-group mb-3">
+                <label class="form-label">Year</label>
+                <input type="text" class="form-control" formControlName="year" placeholder="Enter Year" />
+            </div>
+            <div class="form-group" *ngIf="!isEditing">
+                <button class="btn btn-primary" type="submit" (click)="addYear()">Add Year</button>
+            </div>
+            <div class="form-group" *ngIf="isEditing">
+                <button class="btn btn-success" type="submit" (click)="updateYear()">Update Year</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

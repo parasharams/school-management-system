@@ -1,0 +1,66 @@
+<div class="card">
+    <div class="card-body">
+        <div class="float-end" ngbDropdown placement="bottom-end">
+            <a ngbDropdownToggle class="arrow-none text-muted" id="chatMenu" href="javascript:void(0)"
+                aria-expanded="false">
+                <i class="uil uil-ellipsis-v"></i>
+            </a>
+            <div ngbDropdownMenu class="dropdown-menu-end" aria-labelledby="chatMenu">
+                <!-- item-->
+                <a ngbDropdownItem>
+                    <i class="uil uil-refresh me-2"></i>Refresh
+                </a>
+                <!-- item-->
+                <a ngbDropdownItem>
+                    <i class="uil uil-user-plus me-2"></i>Add New
+                </a>
+                <div class="dropdown-divider"></div>
+                <!-- item-->
+                <a ngbDropdownItem>
+                    <i class="uil uil-exit me-2"></i>Exit
+                </a>
+            </div>
+        </div>
+
+        <h4 class="header-title mb-4">{{cardTitle}}</h4>
+
+        <div class="chat-conversation">
+            <ngx-simplebar style="max-height: 314px;">
+                <ul class="conversation-list">
+                    <li class="clearfix" *ngFor="let message of chatMessages;"
+                        [ngClass]="{'odd': message.sender.name==='Dominic'}">
+                        <div class="chat-avatar">
+                            <img [src]="message.sender.avatar" alt="user">
+                            <i>{{message.time}}</i>
+                        </div>
+                        <div class="conversation-text">
+                            <div class="ctext-wrap">
+                                <i>{{message.sender.name}}</i>
+                                <p>
+                                    {{message.message}}
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </ngx-simplebar>
+
+            <form class="needs-validation" name="chat-form" #chatForm="ngForm" (ngSubmit)="sendMessage()">
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control chat-input" placeholder="Enter your text" required
+                            name="new-message" [(ngModel)]="newMessage"
+                            [ngClass]="{'is-invalid': submitted && newMessage===''}">
+                        <div class="invalid-feedback">
+                            Please enter your messsage
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-danger chat-send waves-effect waves-light">Send</button>
+                    </div>
+                </div>
+            </form>
+
+        </div> <!-- end .chat-conversation-->
+    </div>
+</div> <!-- end card-->

@@ -1,0 +1,330 @@
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex pb-2 border-bottom align-items-center">
+            <img [src]="selectedUser.avatar" class="me-2 rounded-circle" height="48" alt="Brandon Smith" />
+            <div>
+                <h5 class="mt-0 mb-0 fs-14">{{selectedUser.name}}</h5>
+                <p class="mb-0">{{selectedUser.userStatus}}</p>
+            </div>
+            <div class="flex-grow-1">
+                <ul class="list-inline float-end mb-0">
+                    <li class="list-inline-item fs-18 me-3 dropdown">
+                        <a href="javascript: void(0);" class="text-dark"
+                            (click)="openModal(voicecall,'sm','voice-call')">
+                            <i class="bi bi-telephone-plus"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item fs-18 me-3 dropdown">
+                        <a href="javascript: void(0);" class="text-dark"
+                            (click)="openModal(videocall,'sm','video-call')">
+                            <i class="bi bi-camera-video"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item fs-18" ngbDropdown>
+                        <a href="javascript: void(0);" class="text-dark" ngbDropdownToggle>
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </a>
+                        <div class="dropdown-menu-end" ngbDropdownMenu>
+                            <a ngbDropdownItem href="javascript: void(0);" (click)="openModal(profile)">
+                                <i class="bi bi-person-circle fs-16 me-2"></i>View Profile
+                            </a>
+                            <a ngbDropdownItem><i class="bi bi-music-note-list fs-16 me-2"></i>Media, Links and Docs</a>
+                            <a ngbDropdownItem><i class="bi bi-search fs-16 me-2"></i>Search</a>
+                            <a ngbDropdownItem><i class="bi bi-image fs-16 me-2"></i>Wallpaper</a>
+                            <a ngbDropdownItem><i class="bi bi-arrow-right-circle fs-16 me-2"></i>More</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-1">
+            <app-ui-preloader [display]="loading"></app-ui-preloader>
+            <ngx-simplebar style="max-height: 505px">
+                <ul class="conversation-list px-0 h-100">
+                    <ng-container *ngFor="let record of chatHistory">
+                        <li class="position-relative">
+                            <hr>
+                            <h4><span
+                                    class="badge bg-light text-dark position-absolute top-0 start-50 translate-middle">{{record.day}}</span>
+                            </h4>
+                        </li>
+                        <ng-container *ngFor="let message of record.messages;let i=index;">
+                            <li class="clearfix" *ngFor="let item of message.messages;let j=index;"
+                                [ngClass]="{'odd': message.from.id === toUser.id,'mb-1':message.messages.length>1 && j!=message.messages.length-1}">
+                                <div class="conversation-text ms-0">
+                                    <div class="d-flex"
+                                        [ngClass]="{'justify-content-end': message.from.id === toUser.id}">
+                                        <div class="conversation-actions dropstart" ngbDropdown placement="start-top"
+                                            *ngIf="message.from.id === toUser.id">
+                                            <a href="javascript: void(0);" class="text-dark ps-1" ngbDropdownToggle><i
+                                                    class='bi bi-three-dots-vertical fs-14'></i></a>
+                                            <div ngbDropdownMenu>
+                                                <a ngbDropdownItem>
+                                                    <i class="bi bi-reply fs-16 me-2"></i>Reply
+                                                </a>
+                                                <a ngbDropdownItem>
+                                                    <i class="bi bi-star fs-16 me-2"></i>Starred
+                                                </a>
+                                                <a ngbDropdownItem>
+                                                    <i class="bi bi-trash fs-16 me-2"></i>Delete
+                                                </a>
+                                                <a ngbDropdownItem>
+                                                    <i class="bi bi-files fs-16 me-2"></i>Copy
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="ctext-wrap" *ngIf="item.type==='text'">
+                                            <p>{{item.value}}</p>
+                                        </div>
+                                        <div class="card mb-1 shadow-none border text-start" *ngIf="item.type==='file'">
+                                            <div class="p-2">
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto">
+                                                        <div class="avatar-sm bg-primary text-white">
+                                                            <span class="avatar-title rounded">.ZIP</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col ps-0">
+                                                        <a href="javascript:void(0);"
+                                                            class="text-muted fw-bold">{{item.value.file}}</a>
+                                                        <p class="mb-0">{{item.value.size}}</p>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <a href="javascript:void(0);" class="ps-3 fs-24">
+                                                            <i class="bi bi-arrow-down-square"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="conversation-actions dropend" ngbDropdown placement="end-top"
+                                            *ngIf="message.from.id !== toUser.id">
+                                            <a href="javascript: void(0);" class="text-dark ps-1" ngbDropdownToggle><i
+                                                    class='bi bi-three-dots-vertical fs-14'></i></a>
+                                            <div ngbDropdownMenu>
+                                                <a ngbDropdownItem>
+                                                    <i class="bi bi-reply fs-16 me-2"></i>Reply
+                                                </a>
+                                                <a ngbDropdownItem>
+                                                    <i class="bi bi-star fs-16 me-2"></i>Starred
+                                                </a>
+                                                <a ngbDropdownItem>
+                                                    <i class="bi bi-trash fs-16 me-2"></i>Delete
+                                                </a>
+                                                <a ngbDropdownItem>
+                                                    <i class="bi bi-files fs-16 me-2"></i>Copy
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="text-muted fs-12 mb-0 mt-1" *ngIf="j===message.messages.length-1">
+                                        {{message.sendOn}}
+                                        <i class="bi bi-check2-all ms-1 text-success"
+                                            *ngIf="message.from.id === toUser.id"></i>
+                                    </p>
+                                </div>
+                            </li>
+                        </ng-container>
+                    </ng-container>
+
+                </ul>
+            </ngx-simplebar>
+
+            <div class="mt-2 bg-light p-3 rounded">
+                <form class="needs-validation" name="chat-form" id="chat-form"
+                    (ngSubmit)="chatForm.form.valid && sendChatMessage()" #chatForm="ngForm">
+                    <div class="row">
+                        <div class="col mb-2 mb-sm-0">
+                            <input type="text" class="form-control border-0" placeholder="Enter your text"
+                                [(ngModel)]="newMessage" name="message" #message="ngModel"
+                                [ngClass]="{'is-invalid': chatForm.submitted && message.invalid && (message.dirty || message.touched)}"
+                                required="">
+                            <div *ngIf="chatForm.submitted && message.invalid && (message.dirty || message.touched)"
+                                class="invalid-feedback">
+                                Please enter your messsage
+                            </div>
+                        </div>
+                        <div class="col-sm-auto">
+                            <div class="btn-group">
+                                <a href="javascript:void(0)" class="btn btn-light"><i
+                                        class="bi bi-emoji-smile fs-18"></i></a>
+                                <a href="javascript:void(0)" class="btn btn-light">
+                                    <i class="bi bi-paperclip fs-18"></i>
+                                </a>
+                                <a href="javascript:void(0)" class="btn btn-light"><i
+                                        class="bi bi-camera fs-18"></i></a>
+                                <div class="d-grid">
+                                    <button type="submit" [disabled]="!chatForm.form.valid"
+                                        class="btn btn-success chat-send"><i class='uil uil-message'></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> <!-- End card-body -->
+</div> <!-- End card -->
+
+
+<!-- modal start -->
+<ng-template #voicecall let-modal>
+    <div class="modal-header mt-5 justify-content-center" id="voice-call">
+        <div class="voice-call-head">
+            <img src="assets/images/users/avatar-2.jpg" class="rounded-circle" alt="Rhonda D" />
+        </div>
+
+    </div>
+
+    <div class="modal-body pt-0 text-center">
+        <p class="mb-5">Calling...</p>
+        <div class="voice-call-action pt-4 pb-2">
+            <ul class="list-inline">
+                <li class="list-inline-item avatar-sm fw-bold me-2">
+                    <a href="javascript: void(0);"
+                        class="avatar-title rounded-circle bg-soft-secondary text-dark fs-16">
+                        <i class="bi bi-mic-mute"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item avatar fw-bold me-2" (click)="modal.close('Close click')">
+                    <a href=" javascript: void(0);" class="avatar-title rounded-circle bg-danger text-white fs-18">
+                        <i class="bi bi-telephone"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item avatar-sm fw-bold">
+                    <a href="javascript: void(0);"
+                        class="avatar-title rounded-circle bg-soft-secondary text-dark fs-16">
+                        <i class="bi bi-volume-up"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #videocall let-modal>
+    <div id="video-call" class="modal-header mb-5 justify-content-end">
+        <div class="video-call-head">
+            <img src="assets/images/users/avatar-2.jpg" class="rounded" alt="Rhonda D" />
+        </div>
+    </div>
+
+    <div class="modal-body">
+        <div class="video-call-action text-center pt-4 pb-2">
+            <ul class="list-inline">
+                <li class="list-inline-item avatar-sm fw-bold me-2">
+                    <a href="javascript: void(0);" class="avatar-title rounded-circle bg-soft-light text-white fs-16">
+                        <i class="bi bi-mic-mute"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item avatar fw-bold me-2">
+                    <a href="javascript: void(0);" class="avatar-title rounded-circle bg-danger text-white fs-18">
+                        <i class="bi bi-telephone" (click)="modal.close('Close click')"></i>
+                    </a>
+                </li>
+                <li class="list-inline-item avatar-sm fw-bold">
+                    <a href="javascript: void(0);" class="avatar-title rounded-circle bg-soft-light text-white fs-16">
+                        <i class="bi bi-camera-video"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</ng-template>
+
+<ng-template #profile let-modal>
+    <div class="m-2">
+        <div class="modal-header">
+            <button type="button" class="btn-close" (click)="modal.close('Close click')"></button>
+        </div>
+        <div class="text-center mb-3">
+            <img src="assets/images/users/avatar-5.jpg" class="rounded-circle avatar-lg" height="48" alt="Rhonda D" />
+        </div>
+        <div class="text-center mb-3">
+            <h5 class="mt-0 mb-0 fs-18">Rhonda D</h5>
+        </div>
+        <div class="text-center mb-3">
+            <div class="avatar-sm fw-bold d-inline-block me-2"
+                (click)="modal.close('Close click');openModal(voicecall,'sm','voice-call')">
+                <a href="javascript: void(0);" class="avatar-title rounded-circle border border-secondary text-dark">
+                    <i class="bi bi-telephone"></i>
+                </a>
+            </div>
+            <div class="avatar-sm fw-bold d-inline-block me-2"
+                (click)="modal.close('Close click');openModal(videocall,'sm','video-call')">
+                <a href="javascript: void(0);" class="avatar-title rounded-circle border border-secondary text-dark">
+                    <i class="bi bi-camera-video"></i>
+                </a>
+            </div>
+            <div class="avatar-sm fw-bold d-inline-block me-2" (click)="modal.close('Close click')">
+                <a href="javascript: void(0);" class="avatar-title rounded-circle border border-secondary text-dark">
+                    <i class="bi bi-chat-left-dots"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body">
+
+        <ngb-accordion #acc1="ngbAccordion" activeIds="about" [closeOthers]="true"
+            class="custom-accordionwitharrow mb-1">
+
+            <ngb-panel id="about" cardClass="shadow-none border-0">
+                <ng-template ngbPanelTitle>
+
+
+                    <h5 class="m-0 fs-16 text-dark">
+                        About
+                        <i class="uil uil-angle-down float-end accordion-arrow"></i>
+                    </h5>
+
+
+                </ng-template>
+                <ng-template ngbPanelContent>
+                    <div class="card-body pt-0 text-muted">
+                        <div class="row align-items-center ms-1">
+                            <div class="col-4 p-2"><i class="bi bi-telephone fs-18 me-2"></i>Phone</div>
+                            <div class="col-8 p-2 border-bottom">(415) 281 - 1649</div>
+                            <div class="col-4 p-2"><i class="bi bi-envelope fs-18 me-2"></i>Email</div>
+                            <div class="col-8 p-2 border-bottom">shreyu.abc@gmail.com</div>
+                        </div>
+                    </div>
+                </ng-template>
+
+            </ngb-panel>
+
+            <ngb-panel id="files" cardClass="shadow-none border-0">
+                <ng-template ngbPanelTitle>
+
+
+                    <h5 class="m-0 fs-16 text-dark">Media, Links and Docs
+                        <i class="uil uil-angle-down float-end accordion-arrow"></i>
+                    </h5>
+
+                </ng-template>
+                <ng-template ngbPanelContent>
+                    <div class="card-body pt-0 text-muted">
+                        <div class="d-inline-block me-2">
+                            <i class="bi bi-file-earmark-pdf h2"></i>
+                        </div>
+                        <div class="d-inline-block me-2">
+                            <i class="bi bi-file-earmark-word h2"></i>
+                        </div>
+                        <div class="d-inline-block me-2">
+                            <i class="bi bi-images h2"></i>
+                        </div>
+                        <div class="d-inline-block me-2">
+                            <i class="bi bi-file-earmark-ppt h2"></i>
+                        </div>
+                    </div>
+                </ng-template>
+
+            </ngb-panel>
+
+
+        </ngb-accordion>
+
+    </div>
+
+</ng-template>

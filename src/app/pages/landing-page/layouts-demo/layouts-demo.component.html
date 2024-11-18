@@ -1,0 +1,53 @@
+<section class="py-5 bg-body border-bottom border-top" id="layoutdemos">
+    <div class="container">
+        <div class="row py-3">
+            <div class="col-lg-12">
+                <div class="text-center">
+                    <h1>Creative Demos</h1>
+                    <p class="text-muted mt-2 fs-15">
+                        Multiple navigation layouts and navigation color schemes are available to cater need of any
+                        modern web
+                        application. <br />
+                        We understand that having only html bundle is not enough and so we have developed the
+                        React, Angular, Vue and Laravel versions as well.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2 pb-3">
+            <div class="col text-center">
+                <img src="assets/images/brands/bootstrap.png" alt="" height="48" class="m-1" placement="top"
+                    ngbTooltip="Bootstrap v5" />
+                <img src="assets/images/brands/html5.png" alt="" height="48" class="m-1" placement="top"
+                    ngbTooltip="Html 5" />
+                <img src="assets/images/brands/css3.png" alt="" height="48" class="m-1" placement="top"
+                    ngbTooltip="CSS 3" />
+                <img src="assets/images/brands/angular.png" alt="" height="48" class="m-1" placement="top"
+                    ngbTooltip="Angular" />
+                <img src="assets/images/brands/sass.png" alt="" height="48" class="m-1" placement="top"
+                    ngbTooltip="SCSS" />
+                <img src="assets/images/brands/gulp.png" alt="" height="48" class="m-1" placement="top"
+                    ngbTooltip="Gulp v4" />
+                <img src="assets/images/brands/yarn.png" alt="" height="48" class="m-1" placement="top"
+                    ngbTooltip="Yarn" />
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-xl-4 col-md-6" *ngFor="let layout of layoutList">
+                <div class="card border-0">
+                    <div class="card-body shadow-none text-center">
+                        <a [href]="[layout.link]" (click)="changedLayoutConfig(layout.name)">
+                            <img [src]="layout.imageUrl" alt="demo-img"
+                                class="shadow-sm rounded img-thumbnail animate" />
+                            <h5 class="mt-3 fs-16">{{layout.name}}</h5>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>

@@ -1,0 +1,305 @@
+<!-- page title -->
+<app-page-title [breadcrumbItems]="pageTitle" title="Student List"></app-page-title>
+<!-- start row-->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-end mb-2">                    
+                    <!-- <div class="form-group mb-2">
+                        <label class="form-label">Select Year</label>
+                        <select2 [data]="years" placeholder="Select Year" formControlName="year" id="selec2-year"></select2>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="form-label">Select Exam</label>
+                        <select2 [data]="classes" placeholder="Select Class" formControlName="class" id="selec2-class"></select2>
+                    </div> -->
+                    <!-- <button class="btn btn-primary" (click)="open(StudForm)">Student Registration</button> -->
+                </div>
+                <div *ngIf="errMsg" class="alert alert-danger alert-dismissible fade show" role="alert"
+                    style="width:100%">
+                    <strong>{{errMsg}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <!--Close Error Message-->
+                <!-- Show Success Message -->
+                <div *ngIf="successMsg" class="alert alert-success alert-dismissible fade show" role="alert"
+                    style="width:100%">
+                    <strong>{{successMsg}}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <!-- Table-->                
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">Sr. No.</th>
+                                <th scope="col">Registration ID</th>
+                                <th scope="col">Student Name</th>
+                                <th scope="col">DOB</th>
+                                <th scope="col">Gender</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let student of studentdata">
+                                <td>{{student.studentId}}</td>
+                                <td>{{student.registrationID}}</td>
+                                <td>{{student.fname}} {{student.mname}} {{student.lname}}</td>
+                                <td>{{student.class}}</td>
+                                <td>{{student.year}}</td>
+                                <td>
+                                    <button class="btn btn-info btn-sm" style="padding: 2px 7px;" (click)="getStudDetails(StudForm, student.studentId)"><i class="bi bi-pencil-square" style="font-size: 14px;"></i></button>&nbsp;
+                                    <button class="btn btn-danger btn-sm" style="padding: 2px 7px;" (click)="deleteStudentData(student.studentId)"><i class="bi bi-trash" style="font-size: 14px;"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end row-->
+<!-- StudForm modal start -->
+<ng-template #StudForm let-modal>
+    <div class="modal-header">
+        <h4 *ngIf="!isEditing" class="modal-title" id="modalLabel">Student Registration Form</h4>
+        <h4 *ngIf="isEditing" class="modal-title" id="modalLabel">Edit Student</h4>
+        <button type="button" class="btn-close" id="cancel" (click)="modal.dismiss('Cross click')"
+            style="margin-left: 0;">
+        </button>
+    </div>
+    <div class="modal-body">
+        <!-- Show Error Message -->
+        <div *ngIf="errMsg" class="alert alert-danger alert-dismissible fade show" role="alert" style="width:100%">
+            <strong>{{errMsg}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <!--Close Error Message-->
+        <!-- Show Success Message -->
+        <div *ngIf="successMsg" class="alert alert-success alert-dismissible fade show" role="alert" style="width:100%">
+            <strong>{{successMsg}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="studentForm">
+            <div class="form-group mb-2" *ngIf="isEditing">
+                <label class="form-label">Registration ID</label>
+                <input class="form-control" formControlName="registrationID" readonly>
+            </div>
+                    <div class="form-group mb-2">
+                        <label class="form-label">Year</label>
+                        <select class="form-select" formControlName="year">
+                            <option selected>Select Year</option>
+                            <option *ngFor="let y of yearList" value="{{y.yearId}}">{{y.year}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="form-label">Class</label>
+                        <select class="form-select" formControlName="studclass">
+                            <option selected>Select Class</option>
+                            <option *ngFor="let y of classList" value="{{y.classId}}">{{y.classname}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="form-label">First name</label>
+                        <input type="text" class="form-control" formControlName="fname" placeholder="Enter First Name" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="form-label">Middle name</label>
+                        <input type="text" class="form-control" formControlName="mname" placeholder="Enter Middle Name" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="form-label">Last name</label>
+                        <input type="text" class="form-control" formControlName="lname" placeholder="Enter Last Name" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="form-label">Gender</label>
+                        <select class="form-select" formControlName="gender">
+                            <option value="Male" selected>Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group mb-2">
+                                <label class="form-label">Dath of Birth</label>
+                                <input type="date" class="form-control"
+                                    formControlName="dob" placeholder="Date of Birth" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group mb-2">
+                                <label class="form-label">Age</label>
+                                <input type="text" class="form-control" formControlName="age" placeholder="Age" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="form-label">Aadhar</label>
+                        <input type="number" class="form-control" formControlName="aadhar" maxlength="12" placeholder="Aadhar" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="form-label">PanCard</label>
+                        <input type="text" class="form-control" formControlName="pan" maxlength="10" style="text-transform: uppercase;" placeholder="Pancard" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="form-label">Contact Number</label>
+                        <input type="text" class="form-control" formControlName="contact" placeholder="Enter Contact Number" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="form-label">Mother name</label>
+                        <input type="text" class="form-control" formControlName="mothername" placeholder="Enter Mother Name" />
+                    </div>
+                    <div class="form-group mb-2">
+                        <label class="form-label">Address</label>
+                        <textarea type="text" class="form-control" formControlName="address" placeholder="Address" rows="4" ></textarea>
+                    </div>
+            <div class="form-group text-center" *ngIf="!isEditing">
+                <button class="btn btn-primary" type="submit" (click)="addStudent()">Add Student</button>
+            </div>
+            <div class="form-group text-center" *ngIf="isEditing">
+                <button class="btn btn-success" type="submit" (click)="updateStudent()">Update Student</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<!-- StudForm modal start -->
+<ng-template #viewModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modalLabel">Modal Heading</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">        
+        <div class="card">
+            <div class="card-body">
+                <!-- Logo & title -->
+                <!-- <div class="clearfix">
+                    <div class="float-sm-end">
+                        <div class="auth-logo">
+                            <a [routerLink]="['../../dashboard/ecommerce']" class="logo logo-dark text-center">
+                                <span class="logo-lg">
+                                    <img src="../assets/images/logo-dark.png" alt="" height="24">
+                                </span>
+                            </a>
+
+                            <a [routerLink]="['../../dashboard/ecommerce']" class="logo logo-light text-center">
+                                <span class="logo-lg">
+                                    <img src="../assets/images/logo-light.png" alt="" height="24">
+                                </span>
+                            </a>
+                        </div>
+                        <address class="mt-2">
+                            {{invoiceData.address?.line_1}}<br>
+                            {{invoiceData.address?.city}}, {{invoiceData.address?.state}}
+                            {{invoiceData.address?.zip}}<br>
+                            <abbr title="Phone">P:</abbr> {{invoiceData.address?.phone}}
+                        </address>
+                    </div>
+                    <div class="float-sm-start">
+                        <h4 class="m-0 d-print-none">Invoice</h4>
+                        <dl class="row mb-2 mt-3">
+                            <dt class="col-sm-3 fw-normal">Invoice Number :</dt>
+                            <dd class="col-sm-9 fw-normal">{{invoiceData.invoice_id}}</dd>
+
+                            <dt class="col-sm-3 fw-normal">Invoice Date :</dt>
+                            <dd class="col-sm-9 fw-normal">{{invoiceData.invoice_date}}</dd>
+
+                            <dt class="col-sm-3 fw-normal">Due Date :</dt>
+                            <dd class="col-sm-9 fw-normal">{{invoiceData.due_date}}</dd>
+                        </dl>
+                    </div>
+
+                </div> -->
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="fw-normal">Invoice For:</h6>
+                        <h6 class="fs-16">{{invoiceData.customer}}</h6>
+                        <address>
+                            {{invoiceData.address?.line_1}}<br>
+                            {{invoiceData.address?.city}}, {{invoiceData.address?.state}}
+                            {{invoiceData.address?.zip}}<br>
+                            <abbr title="Phone">P:</abbr> {{invoiceData.address?.phone}}
+                        </address>
+                    </div> <!-- end col -->
+
+                    <div class="col-md-6">
+                        <div class="text-md-end">
+                            <h6 class="fw-normal">Total</h6>
+                            <h2>{{invoiceData.total | currency}}</h2>
+                        </div>
+                    </div> <!-- end col -->
+                </div>
+                <!-- end row -->
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table mt-4 table-centered table-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Item</th>
+                                        <th style="width: 10%">Hours</th>
+                                        <th style="width: 10%">Hours Rate</th>
+                                        <th style="width: 10%" class="text-end">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of invoiceData.items">
+                                        <td>{{item.id}}</td>
+                                        <td>
+                                            <h5 class="fs-16 mt-0 mb-2">{{item.name}}</h5>
+                                            <p class="text-muted mb-0">{{item.description}}</p>
+                                        </td>
+                                        <td>{{item.hours}}</td>
+                                        <td>{{item.hour_rate | currency}}</td>
+                                        <td class="text-end">{{item.total | currency}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div> <!-- end table-responsive -->
+                    </div> <!-- end col -->
+                </div>
+                <!-- end row -->
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="clearfix pt-5">
+                            <h6 class="text-muted">Notes:</h6>
+
+                            <small class="text-muted">
+                                {{invoiceData.notes}}
+                            </small>
+                        </div>
+                    </div> <!-- end col -->
+                    <div class="col-sm-6">
+                        <div class="float-end mt-4">
+                            <p><span class="fw-medium">Sub-total :</span>
+                                <span class="float-end">{{invoiceData.sub_total | currency}}</span>
+                            </p>
+                            <p><span class="fw-medium">Discount (10%) :</span>
+                                <span class="float-end"> &nbsp;&nbsp;&nbsp; {{invoiceData.discount
+                                    | currency}}</span>
+                            </p>
+                            <h3>{{invoiceData.total | currency}} USD</h3>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div> <!-- end col -->
+                </div>
+                <!-- end row -->
+
+                <div class="mt-5 mb-1">
+                    <div class="text-end d-print-none">
+                        <a href="javascript:window.print()" class="btn btn-primary me-1">
+                            <i class="uil uil-print me-1"></i> Print</a>
+                        <a href="javascript:void(0)" class="btn btn-info">Submit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

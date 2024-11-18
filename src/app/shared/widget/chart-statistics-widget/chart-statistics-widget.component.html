@@ -1,0 +1,24 @@
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex">
+            <div class="flex-grow-1">
+                <span class="text-muted text-uppercase fs-12 fw-bold">{{mainTitle}}</span>
+                <h3 class="mb-0">{{value}}</h3>
+            </div>
+            <div class="align-self-center flex-shrink-0">
+                <div>
+                    <apx-chart class="apex-charts" [series]="chartOptions.series!" [chart]="chartOptions.chart!"
+                        [stroke]="chartOptions.stroke!" [markers]="chartOptions.markers!" [fill]="chartOptions.fill!"
+                        [colors]="chartOptions.colors!" [tooltip]="chartOptions.tooltip!" *ngIf="chartOptions">
+                    </apx-chart>
+                </div>
+                <span class="text-danger fw-bold fs-13" *ngIf="subValue!<6.0">
+                    <i class='uil uil-arrow-down'></i> {{subValue}}%
+                </span>
+                <span class="text-success fw-bold fs-13" *ngIf="subValue!>=6.0">
+                    <i class='uil uil-arrow-up'></i> {{subValue}}%
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
